@@ -1,0 +1,13 @@
+
+.main-nav-item {
+    text-decoration: none;
+    margin-right: 0.5rem;
+  }
+  
+  .main-nav-item:hover {
+    text-decoration: underline;
+  }
+
+  .fa-user-circle::before {
+    content: "\f2bd";
+  }
