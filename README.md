@@ -1,20 +1,26 @@
 # ArgentBank-website
-1-Backend
+# Backend
+
  ---Launch the server---
+	
 cd Backend
 
-# Install dependencies
+#Install dependencies
+
 npm install
 
-# Start local dev server
+#Start local dev server
+
 npm run dev:server
 
-# Populate database with two users
+#Populate database with two users
+
 npm run populate-db
 
-2-FrontEnd
+# FrontEnd
 
 cd FrontEnd
+
  -------Usage-------
  
 npm install
