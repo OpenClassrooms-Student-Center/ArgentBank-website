@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Sing = () => {
   return (
     <div>
-    <Link className="main-nav-item" to="/sing-in">
+    <Link className="main-nav-item" to="/login">
       <i className="fa fa-user-circle"></i>
       Sign In
     </Link>
