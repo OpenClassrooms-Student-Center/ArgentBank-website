@@ -10,7 +10,7 @@ const RoutesPath = () => {
         <Route path="/" exact element={<Home />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/profile" element={<User />} />
       </Routes>
     </div>
   );
