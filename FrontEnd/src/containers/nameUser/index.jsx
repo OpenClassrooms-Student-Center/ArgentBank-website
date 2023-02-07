@@ -1,6 +1,6 @@
 import "./style.css";
 import {  useSelector } from "react-redux";
-import { body } from "../../features/userSlice";
+import { body } from "../../helpers/features/userSlice";
 const NameUser = () => {
  
   const infos = useSelector(body);

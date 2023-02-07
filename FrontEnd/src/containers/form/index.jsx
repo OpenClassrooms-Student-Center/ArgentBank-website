@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { login } from "../../features/userSlice";
-import { body } from "../../features/userSlice";
+import { login } from "../../helpers/features/userSlice";
+import { body } from "../../helpers/features/userSlice";
 
 
 const From = () => {
