@@ -7,9 +7,9 @@ const Sing = () => {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  const datat = useSelector(body);
-  const name = datat.payload.user.firstName;
-  console.log("data", datat.payload.user.body);
+  const infos = useSelector(body);
+  const name = infos.payload?.user?.body?.body?.firstName
+ 
   console.log("name", name);
 
   function Singout() {
@@ -29,8 +29,9 @@ const Sing = () => {
     </div>
   ) : (
     <div className="logout">
-      <Link to="/profile">
+      <Link className="nameUser" to="/profile">
         <i className="fa fa-user-circle"></i>
+       <p className="name">{name}</p> 
       </Link>
       <button onClick={Singout} className="main-nav-item">
         <i className="fa fa-sign-out"></i>
