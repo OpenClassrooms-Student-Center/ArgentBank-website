@@ -8,14 +8,22 @@ const dbConnection = require('./database/connection')
 
 dotEnv.config()
 
+ 
+
 const app = express()
 const PORT = process.env.PORT || 3001
+
+var corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 
 // Connect to the database
 dbConnection()
 
 // Handle CORS issues
-app.use(cors())
+app.use(cors(corsOptions))
 
 // Request payload middleware
 app.use(express.json())

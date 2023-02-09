@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState  } from "react";
+//import {useEffect} from "react";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../helpers/features/userSlice";
 import { body } from "../../helpers/features/userSlice";
-
 
 const From = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,15 @@ const From = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  async function log(e) {
+
+   
+ 
+   
+     
+
+
+  // useEffect(() => {
+ async function log(e)  {
     e.preventDefault();
     //empty
     if (email.length === 0 || password.length === 0) {
@@ -42,30 +50,26 @@ const From = () => {
           user: item,
         })
       );
-
+//concte avec les info d'utilisateur 
       let token = localStorage.getItem("token");
-let requete = await fetch(
-    "http://localhost:3001/api/v1/user/profile",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        accept: "application/json",
-      }})
+      let requete = await fetch("http://localhost:3001/api/v1/user/profile", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          accept: "application/json",
+        },
+      });
       requete = await requete.json();
-     
-      if (requete.status === 200) {
-// console.log(requete.body.firstName)
-// console.log(requete.body)
-dispatch(
-  body({
-    body: requete.body
-  })
-); 
-// requete()
-      }
-     
 
+      if (requete.status === 200) {
+       
+        dispatch(
+          body({
+            body: requete.body,
+          })
+        );
+      
+      }
     } else {
       setErrorUser(true);
       setEmail("");
@@ -75,8 +79,15 @@ dispatch(
       }
       setTimeout(deletError, 30000);
     }
+ 
+ 
+ 
+  
   }
 
+ // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
+ 
   return (
     <form>
       <div className="input-wrapper">
@@ -119,5 +130,6 @@ dispatch(
     </form>
   );
 };
+    
 
 export default From;
