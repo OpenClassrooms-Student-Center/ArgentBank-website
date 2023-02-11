@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState  } from "react";
-//import {useEffect} from "react";
+import { useState } from "react";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../helpers/features/userSlice";
@@ -14,14 +13,7 @@ const From = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-   
- 
-   
-     
-
-
-  // useEffect(() => {
- async function log(e)  {
+  async function log(e) {
     e.preventDefault();
     //empty
     if (email.length === 0 || password.length === 0) {
@@ -50,22 +42,21 @@ const From = () => {
           user: item,
         })
       );
-//concte avec les info d'utilisateur 
+      //concte avec les info d'utilisateur
       let token = localStorage.getItem("token");
-      let requete = await fetch("http://localhost:3001/api/v1/user/profile", {
+      let response = await fetch("http://localhost:3001/api/v1/user/profile", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
           accept: "application/json",
         },
       });
-      requete = await requete.json();
+    const  profile = await response.json();
 
-      if (requete.status === 200) {
-       
+      if (profile.status === 200) {
         dispatch(
           body({
-            body: requete.body,
+            body: profile.body,
           })
         );
       
@@ -77,17 +68,10 @@ const From = () => {
       function deletError() {
         setErrorUser(false);
       }
-      setTimeout(deletError, 30000);
+      setTimeout(deletError, 3000);
     }
- 
- 
- 
-  
   }
 
- // eslint-disable-next-line react-hooks/exhaustive-deps
- 
- 
   return (
     <form>
       <div className="input-wrapper">
@@ -130,6 +114,6 @@ const From = () => {
     </form>
   );
 };
-    
 
 export default From;
+  // export  const response =;
