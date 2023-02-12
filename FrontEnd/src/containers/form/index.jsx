@@ -35,13 +35,16 @@ const From = () => {
     });
     result = await result.json();
     if (result.status === 200) {
-      localStorage.setItem("token", result.body.token);
       navigate("/profile");
+      localStorage.setItem("token", result.body.token);
+    
       dispatch(
         login({
           user: item,
         })
       );
+      
+      
       //concte avec les info d'utilisateur
       let token = localStorage.getItem("token");
       let response = await fetch("http://localhost:3001/api/v1/user/profile", {

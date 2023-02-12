@@ -1,13 +1,13 @@
 
-import{Navigate} from "react-router-dom";
+//import{Navigate} from "react-router-dom";
  import React from 'react';
  import User from "../pages/user";
-
+ import Login from "../pages/login";
 const ProtectrdRoute = ({user}) => {
 
  
     if (!user){
-        return < Navigate to = "/notFound"/>
+        return < Login/>
     }
   
         return <User />
