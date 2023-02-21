@@ -2,7 +2,7 @@ import "./style.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { body } from "../../helpers/features/userSlice";
-import Modal from "../modal"; 
+import EditUser from "../editUser";
 const NameUser = ()=> {
   const infos = useSelector(body);
   let userNameDefault = infos.payload?.user?.body?.body?.userName;
@@ -14,7 +14,9 @@ const NameUser = ()=> {
     setOpen(true);
   }
 
-  return (
+  return ( open ?
+    <EditUser closeModal={setOpen} /> 
+    :
     <div className="header">
       <h1>
         Welcome back
@@ -25,7 +27,7 @@ const NameUser = ()=> {
       <button onClick={edit} className="edit-button">
         Edit Name
       </button>
-      {open ? <Modal closeModal={setOpen} /> : ""}
+   
     </div>
   );
 };
