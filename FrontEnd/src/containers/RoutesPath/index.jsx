@@ -6,7 +6,9 @@ import User from "../../pages/user";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../helpers/features/userSlice"
 import ProtectrdRoute from "../../helpers/protectrdRoute";
-// import ProtectrdLogin from "../../helpers/ProtectrdRouteLogin"
+import Protect from "../../helpers/protect";
+
+
 const RoutesPath = () => {
   const user = useSelector(selectUser);
 
@@ -15,7 +17,7 @@ const RoutesPath = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/*" element={<NotFound />} />
-         <Route path="/login" element={ <ProtectrdRoute   user={user}>  <Login/> </ProtectrdRoute> } />  
+         <Route path="/login" element={ <Protect  user={user}>  <Login/></Protect> } />  
         <Route path="/profile" element={  <ProtectrdRoute  user={user} > <User/> </ProtectrdRoute>} />
       </Routes>
     </div>

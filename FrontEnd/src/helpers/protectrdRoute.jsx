@@ -1,18 +1,11 @@
+import { Navigate } from "react-router-dom";
+import React from "react";
 
-//import{Navigate} from "react-router-dom";
- import React from 'react';
- import User from "../pages/user";
- import Login from "../pages/login";
-const ProtectrdRoute = ({user}) => {
+const ProtectrdRoute = ({ user, children }) => {
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
- 
-    if (!user){
-        return < Login/>
-    }
-  
-        return <User />
- 
-
+  return children;
 };
-
-export default ProtectrdRoute
+export default ProtectrdRoute;
