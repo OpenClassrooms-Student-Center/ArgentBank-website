@@ -8,7 +8,7 @@ const Sing = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const infos = useSelector(body);
-  const name = infos.payload?.user?.body?.body?.firstName;
+  const userName = infos.payload?.user?.body?.body?.userName;
 
   function Singout() {
     localStorage.removeItem("token");
@@ -32,7 +32,7 @@ const Sing = () => {
     <div className="logout">
       <Link className="nameUser" to="/profile">
         <i className="fa fa-user-circle"></i>
-        <p className="name">{name}</p>
+        <p className="user name">{userName}</p>
       </Link>
       <button onClick={Singout} className="main-nav-item">
         <i className="fa fa-sign-out"></i>

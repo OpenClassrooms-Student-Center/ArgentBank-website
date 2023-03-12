@@ -13,7 +13,7 @@ const EditUser = ({ closeModal }) => {
   const [userName, setUserName] = useState(userNameDefault);
   let token = localStorage.getItem("token");
   const dispatch = useDispatch();
-  console.log(userName);
+ 
   async function Update(e) {
     e.preventDefault();
     let editName = await fetch("http://localhost:3001/api/v1/user/profile", {
