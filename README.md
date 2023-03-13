@@ -1,8 +1,9 @@
 # ArgentBank-website
+projet n11 de la formation Integrateur Web  --OpenClassrooms--
+
 # Backend
 
- ---Launch the server---
-	
+---Launch the server---
 cd Backend
 
 #Install dependencies
@@ -21,8 +22,8 @@ npm run populate-db
 
 cd FrontEnd
 
- -------Usage-------
- 
+-------Usage-------
+
 npm install
 
 Once the project is cloned, run this command to install all the dependencies needed for the project.
