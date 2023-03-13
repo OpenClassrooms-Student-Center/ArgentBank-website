@@ -27,6 +27,7 @@ projet n11 de la formation Integrateur Web  --OpenClassrooms--
 Once the project is cloned, run this command to install all the dependencies needed for the project.
 
 ➡npm start
+
 Runs the app in the development mode. Open http://localhost:3000 to view it in your browser.
 
 ![1](https://user-images.githubusercontent.com/76797190/224700030-1569011f-bc80-4bab-a0fb-1c03ce1df97e.PNG)
