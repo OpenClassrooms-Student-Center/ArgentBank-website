@@ -2,10 +2,15 @@ import React from 'react';
 import logo from '../src/assets/logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import './components/components.css';
+import { Header } from './components/header';
+import { Log } from './components/log';
+import { Footer } from './components/footer';
 
 function App() {
 	return (
 		<div className="App">
+			<Header children={<Log />} />
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<Counter />
@@ -51,6 +56,7 @@ function App() {
 					</a>
 				</span>
 			</header>
+			<Footer />
 		</div>
 	);
 }
