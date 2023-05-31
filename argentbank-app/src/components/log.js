@@ -6,17 +6,17 @@ export function Log() {
 	const [logged, setLogged] = useState(false);
 	return logged ? (
 		<div>
-			<Link to={'user.html'}>
+			<Link to={''}>
 				<i class="fa fa-user-circle"></i>
 				Tony
 			</Link>
-			<Link to={'index.html'}>
+			<Link to={''}>
 				<i class="fa fa-sign-out"></i>
 				Sign Out
 			</Link>
 		</div>
 	) : (
-		<Link to={'sign-in.html'}>
+		<Link to={'Login'}>
 			<i class="fa fa-user-circle"></i>
 			Sign In
 		</Link>
