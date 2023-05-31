@@ -1,8 +1,8 @@
 import './components.css';
 
-export function Button({ buttonText, onClick }) {
+export function Button({ buttonText, onClick, classStyle }) {
 	return (
-		<button class="sign-in-button" onClick={onClick}>
+		<button class={classStyle} onClick={onClick}>
 			{buttonText}
 		</button>
 	);
