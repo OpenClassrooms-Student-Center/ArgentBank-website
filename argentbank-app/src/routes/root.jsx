@@ -6,10 +6,10 @@ import { Footer } from '../components/footer';
 
 export default function Root() {
     return (
-      <div>
+      <>
       <Header children={<Log />} />
             <Outlet/>
 			<Footer />
-		</div>
+		</>
   );
 }
