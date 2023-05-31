@@ -19,7 +19,11 @@ export function Form() {
 					<input type="checkbox" id="remember-me" />
 					<label for="remember-me">Remember me</label>
 				</div>
-				<Button buttonText={'Sign in'} onClick={''} />
+				<Button
+					buttonText={'Sign in'}
+					onClick={''}
+					classStyle={'sign-in-button'}
+				/>
 			</form>
 		</section>
 	);
