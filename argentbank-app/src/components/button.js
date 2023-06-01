@@ -2,7 +2,7 @@ import './components.css';
 
 export function Button({ buttonText, onClick, classStyle }) {
 	return (
-		<button class={classStyle} onClick={onClick}>
+		<button className={classStyle} onClick={onClick}>
 			{buttonText}
 		</button>
 	);

@@ -7,17 +7,17 @@ export function Log() {
 	return logged ? (
 		<div>
 			<Link to={''}>
-				<i class="fa fa-user-circle"></i>
+				<i className="fa fa-user-circle"></i>
 				Tony
 			</Link>
 			<Link to={''}>
-				<i class="fa fa-sign-out"></i>
+				<i className="fa fa-sign-out"></i>
 				Sign Out
 			</Link>
 		</div>
 	) : (
 		<Link to={'Login'}>
-			<i class="fa fa-user-circle"></i>
+			<i className="fa fa-user-circle"></i>
 			Sign In
 		</Link>
 	);

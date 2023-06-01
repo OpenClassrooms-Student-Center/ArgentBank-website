@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 export function Header({ children }) {
 	return (
-		<nav class="main-nav">
+		<nav className="main-nav">
 			<Link to={''}>
 				<img
-					class="main-nav-logo-image"
+					className="main-nav-logo-image"
 					src={logo}
 					alt="Argent Bank Logo"
 				/>
-				<h1 class="sr-only">Argent Bank</h1>
+				<h1 className="sr-only">Argent Bank</h1>
 			</Link>
 			<div>{children}</div>
 		</nav>
