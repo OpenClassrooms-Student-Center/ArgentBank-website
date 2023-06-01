@@ -1,6 +1,6 @@
 import './components.css';
 import { Button } from '../components/button';
-import { Login } from '../features/login/Login';
+import { LogUser } from '../features/login/LogUser';
 
 export function Form() {
 	return (
@@ -22,7 +22,7 @@ export function Form() {
 				</div>
 				<Button
 					buttonText={'Sign in'}
-					onClick={Login}
+					onClick={LogUser}
 					classStyle={'sign-in-button'}
 				/>
 			</form>

@@ -1,5 +1,5 @@
-export async function Login(e) {
-	e.preventDefault();
+export async function LogUser(event) {
+	event.preventDefault();
 	const settings = {
 		method: 'POST',
 		headers: {
