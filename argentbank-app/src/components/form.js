@@ -1,6 +1,14 @@
 import './components.css';
 import { Button } from '../components/button';
-import { LogUser } from '../features/login/LogUser';
+import { logUser } from '../features/login/user';
+import { store } from '../utils/store';
+import { Navigate } from 'react-router-dom';
+
+function log(event) {
+	event.preventDefault();
+	logUser(store);
+	<Navigate to="/User" />;
+}
 
 export function Form() {
 	return (
@@ -10,11 +18,11 @@ export function Form() {
 			<form>
 				<div className="input-wrapper">
 					<label for="username">Username</label>
-					<input type="text" id="username" />
+					<input type="text" id="username" required />
 				</div>
 				<div className="input-wrapper">
 					<label for="password">Password</label>
-					<input type="password" id="password" />
+					<input type="password" id="password" required />
 				</div>
 				<div className="input-remember">
 					<input type="checkbox" id="remember-me" />
@@ -22,7 +30,7 @@ export function Form() {
 				</div>
 				<Button
 					buttonText={'Sign in'}
-					onClick={LogUser}
+					onClick={log}
 					classStyle={'sign-in-button'}
 				/>
 			</form>
