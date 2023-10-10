@@ -1,35 +1,54 @@
 import React from "react";
 import styles from "../style/main.css"
-import Button from "./Button";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from '../actions/user.action';
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react'; 
 
-const Modal = () => {
+
+
+function Modal(){
+  const navigate= useNavigate()
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    dispatch(loginUser(email, password, navigate));
+  };
+
     return(
-      <body className="">
-        <main class="main bg-dark">
+      <div className="">
+        <main className="main bg-dark">
         <section className="signInContent">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={handleSignIn}>
           <div className="inputWrapper">
-            <label for="username">Username</label>
-            <input type="text" id="username" />
+            <label htmlFor="email">Username</label>
+            <input type="text" id="email" onChange={(e) => setEmail(e.target.value)} required/>
+            
           </div>
           <div className="inputWrapper">
-            <label for="password">Password</label>
-            <input type="password" id="password" />
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} required/>
+            
           </div>
           <div className="inputRemember">
-            <input type="checkbox" id="remember-me" /><label for="remember-me"
+            <input type="checkbox" id="remember-me" /><label htmlFor="remember-me"
               >Remember me</label>
             
           </div>
           
-           <button className="signInButton">Sign In</button>
+           <button type="submit" className="signInButton">Sign In</button>
           
         </form>
       </section>
       </main>
-      </body>
+      </div>
     )
 }
 export default Modal

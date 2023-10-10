@@ -5,6 +5,9 @@ import LogIcon from "../img/right-from-bracket-solid.svg"
 import styles from "../style/main.css"
 
 const Header = () => {
+
+    const [connection,setConnection] = React.useState(false)
+
     return (
         <div className="mainNav">
             {/* logo a gauche */}
@@ -17,14 +20,17 @@ const Header = () => {
             </a>
             {/* liens à droite */}
             <div className="nav">
-                <a href="/" className="mainNavItem">
-                    <i class="fa fa-user-circle"></i>
+                {connection === true ? <a href="/" className="mainNavItem">
+                    <i className="fa fa-user-circle"></i>
                     <span className="">Tony</span>
-                </a>
-                <a href="/signin" className="mainNavItem">
-                    <i class="fa fa-sign-out"></i>
+                </a> : "" }
+                {connection === true ? <a href="/signin" className="mainNavItem">
+                    <i className="fa fa-sign-out"></i>
                     <span className="">Sign Out</span>
-                </a>
+                </a> : <a href="/signin" className="mainNavItem">
+                    <i className="fa fa-sign-out"></i>
+                    <span className="">Sign In</span>
+                </a>}
             </div>
         </div>
     )
