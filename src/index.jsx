@@ -5,13 +5,8 @@ import './style/main.css';
 
 //REDUX
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './reducers';
+import store from './Store/store.js'
 
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: true,
-})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

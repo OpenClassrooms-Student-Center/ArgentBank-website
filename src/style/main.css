@@ -36,6 +36,13 @@ html {
     background-color: #12002b;
   }
   
+  .error{
+    color: red;
+    
+    padding: 15px;
+    margin-top: 5px;
+  }
+
   .srOnly {
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */

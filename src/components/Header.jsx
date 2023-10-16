@@ -1,12 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useEffect } from 'react'
 import Logo from "../img/argentBankLogo.png"
-import UserIcon from "../img/circle-user-solid.svg"
-import LogIcon from "../img/right-from-bracket-solid.svg"
-import styles from "../style/main.css"
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "../Store/features/userSlice";
+
+
 
 const Header = () => {
 
-    const [connection,setConnection] = React.useState(false)
+    const { firstName } = useSelector((store) => store.user);
+    const dispatch = useDispatch();
+
 
     return (
         <div className="mainNav">
@@ -20,17 +25,27 @@ const Header = () => {
             </a>
             {/* liens à droite */}
             <div className="nav">
-                {connection === true ? <a href="/" className="mainNavItem">
-                    <i className="fa fa-user-circle"></i>
-                    <span className="">Tony</span>
-                </a> : "" }
-                {connection === true ? <a href="/signin" className="mainNavItem">
-                    <i className="fa fa-sign-out"></i>
-                    <span className="">Sign Out</span>
-                </a> : <a href="/signin" className="mainNavItem">
-                    <i className="fa fa-sign-out"></i>
-                    <span className="">Sign In</span>
-                </a>}
+            {!firstName ? (
+                <div>
+                    <Link className="mainNavItem" to="/signin">
+                        <i className="fa fa-user-circle"></i>
+                        Sign In
+                    </Link>
+                </div>
+            ) : (
+                <div>
+                    <Link to="/profile" className="mainNavItem">
+                        <i className="fa fa-user-circle"></i>
+                        {firstName}
+                    </Link>
+                    <Link
+                        to="/"
+                        className="mainNavItem"
+                        onClick={() => dispatch(userLogout())}>
+                        <i className="fa fa-sign-out"></i>
+                        Sign Out
+                    </Link>
+                </div>)}
             </div>
         </div>
     )
