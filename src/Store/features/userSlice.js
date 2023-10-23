@@ -6,6 +6,7 @@ const initialState = {
     token: null,
     firstName: null,
     lastName: null,
+    username:null,
     email: null,
 };
 
@@ -18,18 +19,21 @@ const userSlice = createSlice({
             //Destructive assignment from action
             state.token = payload.token;
             state.email = payload.email;
+            state.username = payload.userName;
         },
         userLogout: (state) => {
             state.token = null;
             state.firstName = null;
             state.lastName = null;
+            state.username = null;
             state.email = null;
         },
-        userName: (state, { payload }) => {
+        mUserName: (state, { payload }) => {
             state.firstName = payload.firstName;
             state.lastName = payload.lastName;
+            state.username = payload.userName;
         },
     },
 });
-export const { userLogin, userLogout, userName } = userSlice.actions;
-export default userSlice.reducer;
+export const { userLogin, userLogout, mUserName } = userSlice.actions;
+export default userSlice.reducer; 

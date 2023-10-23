@@ -20,7 +20,7 @@ export async function getProfileData(token) {
     } catch (error) {
         console.log(error);
     }
-}
+} 
 
 //fonction async pour modifier les informations du profil
 //on utilise un put sur le chemin /user/profile voir swagger

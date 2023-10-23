@@ -26,7 +26,7 @@ async function loginUser(user) {
             error.message === "Failed to fetch data (HTTP 400)"
                 ? "Invalid credentials"
                 : "An error occurred during login";
-        throw new Error(errorMessage);
+        throw new Error(errorMessage); 
     }
 }
 export default loginUser;

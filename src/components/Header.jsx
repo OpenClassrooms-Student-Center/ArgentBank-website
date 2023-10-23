@@ -9,8 +9,9 @@ import { userLogout } from "../Store/features/userSlice";
 
 const Header = () => {
 
-    const { firstName } = useSelector((store) => store.user);
+    const { firstName, username } = useSelector((store) => store.user);
     const dispatch = useDispatch();
+    console.log(username)
 
 
     return (
@@ -27,7 +28,7 @@ const Header = () => {
             <div className="nav">
             {!firstName ? (
                 <div>
-                    <Link className="mainNavItem" to="/signin">
+                    <Link className="mainNavItem" to="/login">
                         <i className="fa fa-user-circle"></i>
                         Sign In
                     </Link>
@@ -36,7 +37,7 @@ const Header = () => {
                 <div>
                     <Link to="/profile" className="mainNavItem">
                         <i className="fa fa-user-circle"></i>
-                        {firstName}
+                        {!username ? firstName : username }
                     </Link>
                     <Link
                         to="/"

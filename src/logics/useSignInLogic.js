@@ -16,13 +16,14 @@ function useSignInLogic() {
         try {
             const response = await loginUser({
                 email: e.target["email"].value,
-                password: e.target["password"].value,
+                password: e.target["password"].value, 
             });
 
             dispatch(
                 userLogin({
                     token: response,
                     email: e.target["email"].value,
+                    
                 })
             );
 

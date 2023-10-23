@@ -1,20 +1,21 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editProfileData, getProfileData } from "../services/ProfileDataApi";
-import { userName } from "../Store/features/userSlice";
+import { mUserName } from "../Store/features/userSlice";
 
 function useProfileLogic() {
     const dispatch = useDispatch();
-    const { token, firstName, lastName } = useSelector((store) => store.user);
+    const { token, firstName, lastName, userName } = useSelector((store) => store.user);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const response = await getProfileData(token);
                 dispatch(
-                    userName({
+                    mUserName({
                         firstName: response.firstName,
                         lastName: response.lastName,
+                        userName: response.userName,
                     })
                 );
             } catch (error) {
@@ -24,18 +25,19 @@ function useProfileLogic() {
         fetchData();
     }, [dispatch, token]);
 
+    //appelé lorsque l'utilisateur sauvegarder son nouveau username
     const handleSaveProfileData = async (e, setIsEditing) => {
         e.preventDefault();
         try {
             const updateName = {
-                firstName: e.target["firstName"].value || firstName,
-                lastName: e.target["lastName"].value || lastName,
+                userName: e.target["userName"].value || userName,
             };
             const response = await editProfileData(token, updateName);
             dispatch(
-                userName({
+                mUserName({
                     firstName: response.firstName,
                     lastName: response.lastName,
+                    userName: response.userName
                 })
             );
             setIsEditing(false);
@@ -47,6 +49,7 @@ function useProfileLogic() {
     return {
         firstName,
         lastName,
+        userName,
         handleSaveProfileData,
     };
 }

@@ -1,17 +1,11 @@
 import React from "react";
 import { useRef } from "react";
-import useSignInLogic from "../../hocks/useSignInLogic.js";
-import Error from '../../components/Error'
-
-
+import useSignInLogic from "../../logics/useSignInLogic.js";
 
 const SignIn = () =>{
 
-
   const { handleSubmit, errorMessage } = useSignInLogic();
   const errorRef = useRef(null);
-
-
 
     return(
         <main className="main bg-dark">
@@ -39,8 +33,7 @@ const SignIn = () =>{
           </div>
           <div className="inputRemember">
             <input type="checkbox" id="remember-me" /><label htmlFor="remember-me"
-              >Remember me</label>
-            
+              >Remember me</label>           
           </div>
           
            <button type="submit" className="signInButton" >
