@@ -40,7 +40,7 @@ const SignIn = () =>{
             Sign In
            </button>
 
-          <div className="error" ref={errorRef}>
+          <div className="error" ref={errorRef}> 
             {errorMessage}
           </div>
         </form>

@@ -23,7 +23,7 @@ const App = () => {
       </Routes>
       <Footer/>
     </BrowserRouter>
-  );
+  ); 
 };
 
 export default App;

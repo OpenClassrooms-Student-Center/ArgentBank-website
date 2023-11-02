@@ -1,6 +1,6 @@
 //on lance une fonction asynchrone pour réaliser un fetch
 //on défini l'url à l'aide du swagger ainsi que la method
-async function loginUser(user) {
+async function loginUser(user) { 
     try {
         const response = await fetch(
             "http://localhost:3001/api/v1/user/login",

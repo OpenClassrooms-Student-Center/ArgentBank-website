@@ -99,32 +99,8 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Account
-      summary: Get Account informations
-      description:
-        This call returns all payment accounts that are relevant regarding of
-        whom is connected
-      responses:
-        '200':
-          description: Accounts retrieved successully
-          schema:
-            $ref: '#/definitions/AccountsInfos'
-        '401':
-          description: Unauthorized, authentication failure.
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-        '408':
-          description: Request Timeout
-        '500':
-          description: Internal Server Error
-  /user/accounts/{accountID}:
+          
+  /user/accounts/{accountId}:
     get:
       security:
         - Bearer: []
@@ -134,7 +110,7 @@ paths:
       description: This call returns transactions history for a month for an account
       parameters:
         - in: path
-          name: accountID
+          name: accountId
           description: unique account ID
           required: true
           type: string
@@ -153,7 +129,37 @@ paths:
           description: Request Timeout
         '500':
           description: Internal Server Error
-  /user/accounts/{accountID}/{transactionID}/{item}:
+          
+  /user/transaction/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Account
+      summary: Get transaction details
+      description: This call returns transactions details
+      parameters:
+        - in: path
+          name: transactionId
+          description: unique transaction Id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Historic retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionDetail'
+        '401':
+          description: Unauthorized, authentication failure.
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+
     put:
       security:
         - Bearer: []
@@ -171,18 +177,8 @@ paths:
           schema:
             $ref: '#/definitions/ModifyCat'
         - in: path
-          name: accountID
-          description: unique account ID
-          required: true
-          type: string
-        - in: path
-          name: transactionID
-          description: unique transaction ID
-          required: true
-          type: string
-        - in: path
-          name: item
-          description: note or category
+          name: transactionId
+          description: unique transaction Id
           required: true
           type: string
       produces:
@@ -191,7 +187,7 @@ paths:
         '200':
           description: Changes saved successfully
           schema:
-            $ref: '#/definitions/Transaction'
+            $ref: '#/definitions/NewTransactionInfos'
         '401':
           description: Unauthorized, authentication failure.
         '408':
@@ -274,52 +270,58 @@ definitions:
           type: number
         balance:
           type: number
-        transaction type:
-          type: string
-        category:
-          type: string
-        note:
-          type: string
-  AccountsInfos:
-    type: array
-    items:
+          
+  TransactionDetail:
       type: object
       properties:
-        accountID:
-          type: string
-        accountName:
-          type: string
         currency:
           type: string
-        accountBalance:
+        date:
+          type: string
+          format: date
+        transactionID:
+          type: string
+        desc:
+          type: string
+        amount:
           type: number
-        nbrTransaction:
+        balance:
           type: number
-        AccountHistoric:
-          type: array
-          items:
-            type: object
-            properties:
-              transactionID:
-                type: string
-              date:
-                type: string
-                format: date
-              desc:
-                type: string
-              amount:
-                type: number
-              balance:
-                type: number
-              transaction type:
-                type: string
-              category:
-                type: string
-              note:
-                type: string
+        Transaction type:
+          type: string
+        Category :
+          type: string
+        Note:
+          type: string
+
+  NewTransactionInfos:
+      type: object
+      properties:
+        currency:
+          type: string
+        date:
+          type: string
+          format: date
+        transactionID:
+          type: string
+        desc:
+          type: string
+        amount:
+          type: number
+        balance:
+          type: number
+        Transaction type:
+          type: string
+        Category :
+          type: string
+        Note:
+          type: string
+        
   ModifyCat:
     type: object
     properties:
-      item:
-        type: string
+        Category :
+          type: string
+        Note:
+          type: string
 
