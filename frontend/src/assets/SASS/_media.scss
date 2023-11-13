@@ -1,0 +1,73 @@
+   ////// MEDIA 920PX /////////
+
+@media (min-width: 920px) {
+    .hero {
+      height: 400px;
+      background-position: 0% 33%;
+    }
+  
+    .hero-content {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      width: 300px;
+      margin: 2rem;
+    }
+  
+    .hero-content .subtitle {
+      font-size: 1.5rem;
+    }
+  
+    .hero-content .text {
+      font-size: 1.2rem;
+    }
+
+    .features {
+      flex-direction: row;
+    }
+  }
+  
+  
+  
+   ////// MEDIA 720 PX /////////
+  @media (min-width: 720px) {
+    .account {
+      flex-direction: row;
+    }
+  
+    .account-content-wrapper.cta {
+      flex: 0;
+    }
+  
+    .transaction-button {
+      width: 200px;
+    }
+  }
+
+
+     ////// MEDIA 400 PX /////////
+
+  @media (max-width: 400px) {
+    
+    .header-list-container{
+      display: flex;
+      flex-direction: column;
+      white-space: nowrap;
+    }
+    .header-list-container:first-child{
+      margin-bottom: 5px;
+    }
+    .header-nav-signout{
+      font-size: 12px;
+    }
+
+  }
+
+
+     ////// MEDIA 325 PX /////////
+
+
+  @media(max-wdth:325px){
+ 
+  }
+   
