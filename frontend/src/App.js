@@ -3,6 +3,7 @@ import './assets/SASS/_index.scss';
 import Footer from './components/Footer/Footer';
 import Header from "./components/Header/Header";
 import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={<Home/>} />
+        <Route path="/SignIn" element={<SignIn/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>
