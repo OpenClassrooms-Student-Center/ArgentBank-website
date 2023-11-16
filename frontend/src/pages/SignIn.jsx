@@ -4,15 +4,14 @@ import React, { useState } from 'react';
 import { fetchUserData } from '../actions/UserActions';
 
 const SignIn = () => {
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-  // Fonction pour gérer les changements dans les champs de saisie
   const handleChange =  (e) => {
     const { name, value } = e.target;
-    // Mettez à jour le state avec les nouvelles valeurs
     setFormData({
       ...formData,
       [name]: value,
@@ -29,7 +28,10 @@ const SignIn = () => {
     console.log('[SIGNIN]///////////////');
     
     try {
-        const apiResponse = await fetchUserData(formData);
+        const apiResponse = await fetchUserData({
+            email: formData.email,
+            password: formData.password,
+          });
         console.log('[SIGNIN]///////////////');
         console.log('[SIGNIN]GET');
         console.log('[SIGNIN]Données renvoyées par l\'API:', apiResponse);
@@ -46,7 +48,7 @@ const SignIn = () => {
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="email">Email
+            <label htmlFor="email">Email</label>
               <input
                 type="text"
                 id="email"
@@ -55,7 +57,6 @@ const SignIn = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
-            </label>
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>

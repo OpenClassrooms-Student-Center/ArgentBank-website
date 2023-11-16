@@ -2,7 +2,7 @@
 
 const initialstate = {
     isAuth: false,
-    user:null,
+    token:null,
 };
 
 export default function userReducer(state = initialstate, action) {
@@ -10,17 +10,17 @@ export default function userReducer(state = initialstate, action) {
         case "LOGIN_SUCCESS":
             return {
                 isAuth: true,
-                user: action.payload,
+                token: action.payload,
             };
         case "LOGOUT":
             return {
                 isAuth: false,
-                user: null,
+                token: null,
             };
         case "UPDATE_USER":
             return {
                 ...state,
-                user: action.payload,
+                token: action.payload,
             };
         default:
             return state;
