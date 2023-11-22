@@ -1,13 +1,16 @@
 import React from 'react';
 import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
-import ProfilePage from '../../Components/ProfilePage/ProfilePage';
+import LoginPage from '../../Components/Login/LoginPage';
+
+import './Signin.css';
+
 
 function SignIn() {
   return (
 <>
     <Header />
-    <ProfilePage />
+    <LoginPage />
     <Footer />
 
 </>

@@ -2,6 +2,7 @@ import React from 'react';
 import chatIcon from '../../Assets/Images/icon-chat.png'; 
 import moneyIcon from '../../Assets/Images/icon-money.png';
 import securityIcon from '../../Assets/Images/icon-security.png';
+import './Body.css';
 
 function Body() {
   return (
