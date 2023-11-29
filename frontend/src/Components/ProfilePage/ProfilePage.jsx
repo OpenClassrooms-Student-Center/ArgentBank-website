@@ -1,7 +1,5 @@
 import React from 'react';
 import './ProfilePage.css';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 
 function ProfilePage() {
   return (

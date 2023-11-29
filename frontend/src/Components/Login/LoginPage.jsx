@@ -4,30 +4,38 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        setIsAuthenticated(true); // Connexion réussie
         navigate(`/profile?id=${data.userId}`);
       } else {
         alert(data.message);
+        setIsAuthenticated(false); // Connexion échouée
       }
     } catch (error) {
       console.error('Login error:', error);
+      setIsAuthenticated(false); // Gérer les erreurs de connexion
     }
   };
+
+  // Affichage de l'état d'authentification (pour débogage ou affichage utilisateur)
+  console.log('Is Authenticated:', isAuthenticated);
+
 
   return (
     <main className="main bg-dark">
@@ -37,7 +45,7 @@ function LoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" value={username} onChange={e => setUsername(e.target.value)} />
+            <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
@@ -47,7 +55,7 @@ function LoginPage() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button type="submit" className="sign-in-button">Sign In</button>
+          <button type="submit" className="sign-in-button" onSubmit={handleSubmit}>Sign In</button>
         </form>
       </section>
     </main>
