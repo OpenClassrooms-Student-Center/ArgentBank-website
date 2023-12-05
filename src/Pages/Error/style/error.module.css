@@ -1,0 +1,58 @@
+.error{
+    margin-bottom: 85px;
+}
+.errorMsg{
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 51.34px;
+        margin-bottom: 139px;
+        margin-top: 139px;
+        color:  #00bc77;
+    }
+
+.errorTitle{
+        color: #00bc77;
+        font-size: 200px;
+        margin-top: 50px;
+        margin-bottom: 0;
+        height: 160px;
+        width: auto;
+    }
+    
+.error footer{
+        margin-top: 139px;
+    }
+
+.returnLink{
+    color: #00bc77;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+@media (max-width: 768px){
+.error{
+    margin-bottom: 35px;
+}
+.errorMsg{
+        font-size: 18px;
+        line-height: 25.67px;
+        margin-top: 45px;
+        margin-bottom: 45px;
+        text-align: center;
+        }
+
+.errorTitle{
+        font-size: 150px;
+     }
+
+.error footer{
+        margin-top: 113px;
+    }
+
+.returnLink{
+        font-size: 14px;
+    }
+}

@@ -65,8 +65,8 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
+      produces:
+        - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,6 +101,155 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for fetching transactions
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Transactions for account retrieved successully
+          schema:
+            $ref: '#/definitions/accountApiResponse'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+  /transactions/{accountId}/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for update category in transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: unique ID of transaction 
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The request succeeded.
+          schema:
+            $ref: '#/definitions/TransactionApiResponse'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+  /transactions/{accountId}/{transactionId}/{item}:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for update category in transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: unique ID of transaction 
+          required: true
+          type: string
+        - in: path
+          name: item
+          description: category or note
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: select category or write a note for this transaction 
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionCategoryNote'
+      responses:
+        '200':
+          description: request succeeded. 
+          schema:
+            $ref: '#/definitions/CategoryApiResponse'
+        '201':
+          description: The request succeeded, and a new resource was created as a result.
+          schema:
+            $ref: '#/definitions/NoteApiResponse'
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized Accès
+        '403':
+          description: Forbidden Accès
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: transaction API
+      description: API for update category in transaction
+      parameters:
+        - in: path
+          name: accountId
+          description: unique ID of account 
+          required: true
+          type: string
+        - in: path
+          name: transactionId
+          description: unique ID of transaction 
+          required: true
+          type: string
+        - in: path
+          name: item
+          description: category or note
+          required: true
+          type: string
+      responses:
+        '200':
+          description: deleted successully . 
+        '400':
+          description: Invalid Fields
+        '401':
+          description: Unauthorized Accès
+        '403':
+          description: Forbidden Accès
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+      
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -132,6 +281,10 @@ definitions:
       password:
         type: string
         description: user password
+  TransactionCategoryNote:
+    properties:
+      item:
+        type: string
   ApiResponse:
     type: object
     properties:
@@ -155,4 +308,52 @@ definitions:
     type: object
     properties:
       userName:
+        type: string
+  accountApiResponse:
+    type: object
+    properties:
+      transactions:
+        type: object
+        properties:
+          transaction:
+            type: object
+            properties:
+              date:
+                type: string
+              description:
+                type: string
+              amount: 
+                type: string
+              balance:
+                type: number
+  CategoryApiResponse:
+    type: object
+    properties:
+      status:
+        type: number
+      message: 
+        type: string
+      category:
+        type: string
+  NoteApiResponse:
+    type: object
+    properties:
+      status:
+        type: number
+      message: 
+        type: string
+      note:
+        type: string
+  TransactionApiResponse:
+    type: object
+    properties:
+      status:
+        type: number
+      message:
+        type: string
+      transaction-type:
+        type: string
+      category:
+        type: string
+      note:
         type: string
