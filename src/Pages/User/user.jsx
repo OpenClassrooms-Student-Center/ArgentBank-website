@@ -3,39 +3,46 @@ import EditForm from "../../components/EditForm/editForm";
 import styles from './style/user.module.css';
 import indexStyles from '../../index.module.css';
 import headerStyles from '../../components/Header/style/header.module.css';
-import { useEffect, useState  } from 'react';
+import { useEffect } from 'react';
 import { useNavigate} from "react-router-dom";
-import compareStorage from "../../utils/compareStorage";
-import { getUser} from "../../reducers/profilSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFirstName, selectLastName, selectUserName } from "../../utils/selector";
+import { useDispatch } from 'react-redux';
+import { getUserInfo } from "../../services";
+import { setProfil } from "../../reducers/profilSlice";
+import { useState } from "react";
 
 
 function User(){
-  const navigate = useNavigate();
-  const firstName = useSelector(selectFirstName);
-  const lastName = useSelector(selectLastName);
-  const userName = useSelector(selectUserName);
-  const [edit, setEdit] = useState(false);
-  const token = compareStorage();
   const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [userName, setUserName] = useState('');
+  const [edit, setEdit] = useState(false);
+  const token = sessionStorage.getItem('token');
+  const locToken = localStorage.getItem('token');
+  const navigate = useNavigate();
+  
+
+
+  
+   async function getDatas(){
+    await getUserInfo().then(data => {
+        setEmail(data.body?.email);
+        setFirstName(data.body?.firstName);
+        setLastName(data.body?.lastName);
+        setUserName(data.body?.userName); 
+      },
+      dispatch(setProfil({email, firstName, lastName, userName}))
+    )};
+  
 
   useEffect(() => {
-    if(token === null){
+    if(token === null && locToken === null){
       navigate('/logIn');
     }
-    else if(firstName === null){
-    dispatch(getUser());
-    } 
-  },[]);
-
-  /**
-  * Cette fonction modifie l'état edit de notre page afin d'afficher ou de cacher le formulaire de modification du userName.
-  */
-    function handleSubmit(){
-      setEdit(!edit);
-    }
-  
+     getDatas(); 
+    
+  })
 
     return(
       <div className={styles.user}>
@@ -43,9 +50,9 @@ function User(){
           {!edit ?
             <div className={styles.headerUser}>
                <h1>Welcome back<br />{`${firstName} ${lastName}`} !</h1>
-                <button className={styles.editButton} onClick={e => {e.preventDefault(); handleSubmit();}}>Edit Name</button>
+                <button className={styles.editButton} onClick={e => {e.preventDefault(); setEdit(!edit)}}>Edit Name</button>
             </div> :
-            <EditForm firstName={firstName} lastName={lastName} defaultUserName={userName} submit= {handleSubmit}/>}
+            <EditForm firstName={firstName} lastName={lastName}/>}
             <h2 className={headerStyles.srOnly}>Accounts</h2>
             <Account title="Argent Bank Checking (x8349)" amount="$2,082.79" description="Available Balance" />
             <Account title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" />

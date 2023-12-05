@@ -35,18 +35,6 @@
         padding: 5px;
         font-size: 1.2rem;
     }
-.errorWrapper {
-    display: none;
-}
-.errorTrue{
-    display: block;
-}
-
-.errorMessage{
-    color: red;
-	margin-top: 5px;
-	margin-bottom: 15px;
-}
   
   
   
