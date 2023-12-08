@@ -10,9 +10,7 @@ function SignIn() {
   return (
 <>
     <Header />
-    <main className="main bg-dark">
     <LoginPage />
-      </main>
     <Footer />
 
 </>

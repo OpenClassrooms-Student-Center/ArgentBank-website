@@ -17,21 +17,23 @@ function LoginPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         setIsAuthenticated(true); // Connexion réussie
-        navigate(`/profile?id=${data.userId}`);
+        localStorage.setItem('token', data.token); // Sauvegarde du token dans le stockage local
+        navigate(`/profile?id=${data.userId}`); // Redirection vers la page de profil
       } else {
-        alert(data.message);
+        alert(data.message); // Affiche un message d'erreur
         setIsAuthenticated(false); // Connexion échouée
       }
     } catch (error) {
-      console.error('Login error:', error);
-      setIsAuthenticated(false); // Gérer les erreurs de connexion
+        alert('Une erreur est survenue lors de la connexion');
+        setIsAuthenticated(false); // Gestion des erreurs de connexion
     }
   };
+  
 
   // Affichage de l'état d'authentification (pour débogage ou affichage utilisateur)
   console.log('Is Authenticated:', isAuthenticated);
