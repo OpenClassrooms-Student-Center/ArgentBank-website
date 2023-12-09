@@ -8,22 +8,33 @@ import '../../Styles/Components/ProfilePage.css';
 function ProfilePage() {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
-  const token = localStorage.getItem('token'); // Récupère le token depuis le stockage local
-
   const fetchDataUser = useCallback(async () => {
     try {
+      const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+  
       const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          'Authorization': `Bearer ${token}`
+        }
       });
+  
       const data = await response.json();
-      dispatch(setGetProfile({ data })); // Met à jour le state Redux
+      console.log('Profile data:', data);
+  
+      if (response.ok) {
+        // Assuming your setGetProfile action expects an object with the user's info directly
+        dispatch(setGetProfile({ 
+          email: data.body.email,
+          id: data.body.id,
+          // Add other fields if your profile state includes more fields
+        }));
+       }
+        else {
+      }
     } catch (err) {
-      console.log(err);
     }
-  }, [dispatch, token]);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchDataUser();

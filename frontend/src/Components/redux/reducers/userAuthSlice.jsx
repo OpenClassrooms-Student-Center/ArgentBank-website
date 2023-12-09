@@ -1,20 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const userAuthSlice = createSlice({
-  // creation d'un slice
-  name: "userAuth", // nom du slice
-  initialState: { token: "" }, // état initial du slice, contenant une propriété token initialisée à une chaîne vide
+  name: "userAuth",
+  initialState: { token: "", isAuthenticated: false, userId: null },
   reducers: {
     setLogIn: (state, action) => {
-      // reducer qui modifie l'état du slice lorsqu'un utilisateur se connecte
-      state.token = action.payload.token; // state (l'état actuel du slice) et action qui contient le payload avec le token d'authentification comme arguments
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
+      state.userId = action.payload.userId; // Assuming the payload includes the userId
     },
     setLogOut: (state) => {
-      // reducer  pour gérer la déconnexion de l'utilisateur
-      state.token = ""; // reinitialise le token
+      state.token = "";
+      state.isAuthenticated = false;
+      state.userId = null;
     },
   },
 });
 
-export const { setLogIn, setLogOut } = userAuthSlice.actions; // export des actions "setLogIn" et "setLogOut"
-export default userAuthSlice.reducer; // export du réducer "userAuthSlice.reducer"
+export const { setLogIn, setLogOut } = userAuthSlice.actions;
+export default userAuthSlice.reducer;

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import '../../Styles/Components/LoginPage.css';
+import '../../Styles/Components/Body.css';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setLogIn } from '../redux/reducers/userAuthSlice';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState(''); 
   const [password, setPassword] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,23 +21,20 @@ function LoginPage() {
       });
   
       const data = await response.json();
-  
+      console.log(data); // Add this line to check the response
+        
       if (response.ok) {
-        setIsAuthenticated(true); // Connexion réussie
-        localStorage.setItem('token', data.token); // Sauvegarde du token dans le stockage local
-        navigate(`/profile?id=${data.userId}`); // Redirection vers la page de profil
-      } else {
-        alert(data.message); // Affiche un message d'erreur
-        setIsAuthenticated(false); // Connexion échouée
+        dispatch(setLogIn({ token: data.token, userId: data.userId }));
+        navigate(`/profile/${data.userId}`);
+      }
+      
+       else {
+        alert(data.message); // Display error message
       }
     } catch (error) {
-        alert('Une erreur est survenue lors de la connexion');
-        setIsAuthenticated(false); // Gestion des erreurs de connexion
+        alert('An error occurred during login');
     }
   };
-
-  // Affichage de l'état d'authentification (pour débogage ou affichage utilisateur)
-  console.log('Is Authenticated:', isAuthenticated);
 
   return (
     <main className="main bg-dark">
