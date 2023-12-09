@@ -1,5 +1,5 @@
-import Button from "./Button";
-import "./Account.css";
+import Button from "../Button/Button";
+import "../../Styles/Components/Account.css";
 
 export default function Account({ title, amount, description }) {
   return (

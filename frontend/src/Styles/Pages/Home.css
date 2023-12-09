@@ -1,0 +1,58 @@
+/* Style pour le composant Home */
+
+.hero {
+    background-color: #f5f5f5; /* Couleur de fond pour la section hero */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .hero-content {
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+  
+  .subtitle {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .text {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #eaeaea;
+  }
+  
+  .feature-item {
+    flex-basis: 30%;
+    text-align: center;
+  }
+  
+  .feature-icon {
+    width: 50px;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  .feature-item-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  /* Vous pouvez ajouter d'autres styles spécifiques selon vos besoins */
+  

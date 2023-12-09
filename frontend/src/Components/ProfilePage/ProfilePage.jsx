@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGetProfile } from '../redux/reducers/profileSlice';
-import Account from '../Components/Account'; // Assurez-vous que ce composant existe
-import EditButton from '../Components/EditButton'; // Assurez-vous que ce composant existe
-import './ProfilePage.css';
+import Account from '../Account/Account'; 
+import EditButton from '../EditButton/EditButton'; 
+import '../../Styles/Components/ProfilePage.css';
 
 function ProfilePage() {
   const dispatch = useDispatch();

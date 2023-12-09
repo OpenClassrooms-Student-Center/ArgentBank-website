@@ -3,7 +3,7 @@ import Footer from '../../Components/Footer/Footer';
 import Header from '../../Components/Header/Header';
 import LoginPage from '../../Components/Login/LoginPage';
 
-import './Signin.css';
+import '../Styles/Pages/SignIn.css';
 
 
 function SignIn() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './LoginPage.css';
+import '../../Styles/Components/LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
@@ -33,11 +33,9 @@ function LoginPage() {
         setIsAuthenticated(false); // Gestion des erreurs de connexion
     }
   };
-  
 
   // Affichage de l'état d'authentification (pour débogage ou affichage utilisateur)
   console.log('Is Authenticated:', isAuthenticated);
-
 
   return (
     <main className="main bg-dark">
@@ -57,7 +55,7 @@ function LoginPage() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
-          <button type="submit" className="sign-in-button" onSubmit={handleSubmit}>Sign In</button>
+          <button type="submit" className="sign-in-button">Sign In</button>
         </form>
       </section>
     </main>

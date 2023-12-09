@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setEditProfile } from "../redux/reducers/profileSlice";
-import Button from "./Button";
-import "./EditButton.css";
+import Button from "../Button/Button";
+import "../../Styles/Components/EditButton.css";
 
 function EditButton() {
   const [isEditing, setIsEditing] = useState(false);
