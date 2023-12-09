@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  // stocke les valeurs initiales des propriétés du profil utilisateur
+  _id: "",
   email: "",
   firstName: "",
   lastName: "",

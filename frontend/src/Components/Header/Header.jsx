@@ -17,6 +17,7 @@ function Header({ isAuthenticated, userName, onSignOut }) {
       <div>
         {isAuthenticated ? (
           <div className="main-nav-item">
+            <i className="fa fa-user-circle main-nav-user-icon"></i>
             <span className="main-nav-username">Bienvenue, {userName}</span>
             <button className="main-nav-signout" onClick={onSignOut}>
               <i className="fa fa-sign-out"></i>
