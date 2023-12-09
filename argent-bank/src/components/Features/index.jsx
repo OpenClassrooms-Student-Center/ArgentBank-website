@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-function Features(props) {
+function Features(item) {
+   const props = item.props
    return (
       <div className="feature-item">
          <img src={props.icon} alt={props.alt} className="feature-icon" />

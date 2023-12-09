@@ -39,7 +39,7 @@ function Editable() {
 
    const handleChangeName = async (event) => {
 		event.preventDefault();
-      console.log(displayName)
+      
       if (displayName !== '') {
 
          setIsThereusername(true)
@@ -81,32 +81,33 @@ function Editable() {
             <form onSubmit={handleChangeName}>
                <div className="input-wrapper">
                   <label htmlFor="firstName">First Name</label>
-                  <input className=" greyForm"
+                  <input className=" grey-form"
                   type="text"
                   id="firstName" 
                   
                   defaultValue={firstName}
-                  readOnly
+                  disabled
                   />
                </div>
                <div className="input-wrapper">
                   <label htmlFor="lastName">Last Name</label>
-                  <input className=" greyForm"
+                  <input className=" grey-form"
                   type="text"
                   id="lastName" 
                   
                   defaultValue={lastName}
-                  readOnly
+                  disabled
                   />
                </div>
                <div className="input-wrapper">
-                  <label htmlFor="username ">Username</label>
-                  <input className={`${isThereUsername ? "" : "errorForm"}`}
+                  <label htmlFor="username">Username</label>
+                  <input className={`${isThereUsername ? "" : "error-form"}`}
                   type="text"
                   id="username" 
                   
                   defaultValue={userName}
                   onChange={(e) => setDisplayName(e.target.value)}
+                  autoComplete="on"
                   />
                   <i className="error-text">{isThereUsername ? ("") : ("You need to input your desired name")}</i>
                </div>

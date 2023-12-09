@@ -6,7 +6,7 @@ import { fetchOrUpdateLogin } from "../../redux/login";
 import { setEmail, setPassword } from "../../redux/credentials";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { selectLogin } from "../../redux/selectors";
+
 
 
 
@@ -48,7 +48,7 @@ function SignIn() {
         
         
         rememberMe ? localStorage.setItem("userEmail", displayMail) : localStorage.removeItem("userEmail");
-        console.log(displayMail)
+        
         
         
         if ((displayMail === '') || (displayPassword === '')) {
@@ -58,6 +58,8 @@ function SignIn() {
             else {
                 setIsThereMail(true)
             }
+            setDisplayPassword('');
+            setIsTherepassword(false);
             
             
 
@@ -68,10 +70,10 @@ function SignIn() {
 
 
 		dispatch(fetchOrUpdateLogin(store));
-        console.log(selectLogin(store.getState()).error)
+        
         }
-        setDisplayPassword('');
-        setIsTherepassword(false);
+        
+        
 
 	};
 
@@ -95,22 +97,23 @@ function SignIn() {
                 <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
-                        <input className={`${isThereMail ? "" : "errorForm"}`}
+                        <input className={`${isThereMail ? "" : "error-form"}`}
                         type="text"
                         id="username" 
-                        value={displayMail}
+                        
                         defaultValue={lastMail}
                         onChange={(e) => setDisplayMail(e.target.value)}
+                        autoComplete="on"
                         />
                         <i className="error-text">{isThereMail ? ("") : ("This field is required")}</i>
                     </div>
                     
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
-                        <input className={`${isTherePassword ? "" : "errorForm"}`}
+                        <input className={`${isTherePassword ? "" : "error-form"}`}
                         type="password"
                         id="password"
-                        value={displayPassword}
+                        
                         onChange={(e) => setDisplayPassword(e.target.value)}
                         
                         />

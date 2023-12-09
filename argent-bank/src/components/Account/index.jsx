@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Account(props) {
+function Account(item) {
+   const props = item.props
    return (
       <section className="account">
          <div className="account-content-wrapper">

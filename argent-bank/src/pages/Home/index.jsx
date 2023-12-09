@@ -7,6 +7,12 @@ import iconShield from '../../assets/icon-security.png'
 import Features from "../../components/Features";
 
 function Home() {
+
+    const data = [
+        { id: 1, icon: iconMessages,  title: "You are our #1 priority", alt: "Messages Icon", description: "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes." },
+        { id: 2, icon: iconMoney, title: "More savings means higher rates", alt: "Money icon", description: "The more you save with us, the higher your interest rate will be!" },
+        { id: 3, icon: iconShield, title: "Security you can trust", alt: "shield icon", description: "We use top of the line encryption to make sure your data and money is always safe." },
+      ];
     return (
         <main>
             <section className="hero">
@@ -20,25 +26,11 @@ function Home() {
                 </div>
             </section>
             <section className="features">
-                <Features
-                    icon={iconMessages}
-                    alt="Messages Icon"
-                    title="You are our #1 priority"
-                    description="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
-                />
-                <Features
-                    icon={iconMoney}
-                    alt="Money icon"
-                    title="More savings means higher rates"
-                    description="The more you save with us, the higher your interest rate will be!"
-                />
+                {data.map((item) => (
+                    
+                    <Features key={item.id} props={item}/>
+                ))}
                 
-                <Features
-                    icon={iconShield}
-                    alt="shield icon"
-                    title="Security you can trust"
-                    description="We use top of the line encryption to make sure your data and money is always safe."
-                />
             </section>
         </main>
     );

@@ -33,34 +33,34 @@ function Profile() {
         dispatch(fetchProfile(store));
         
     });
-   
+    
+    const data = [
+        { id: 1, title: "Argent Bank Checking (x8349)", amount: "$2,082.79", description: "Available Balance", linkPath: "/transactions", transButton: "View transactions" },
+        { id: 2, title: "Argent Bank Savings (x6712)",
+        amount: "$10,928.42",
+        description: "Available Balance",
+        linkPath: "/transactions",
+        transButton: "View transactions" },
+        { id: 3, title: "Argent Bank Credit Card (x8349)",
+        amount: "$184.30",
+        description: "Current Balance",
+        linkPath: "/transactions",
+        transButton: "View transactions" },
+      ];
     
 
     return (
+
+
         
         <main className="main bg-dark">
             <Editable />
-            <Account
-                title="Argent Bank Checking (x8349)"
-                amount="$2,082.79"
-                description="Available Balance"
-                linkPath="/transactions"
-                transButton="View transactions"
-            />
-            <Account
-                title="Argent Bank Savings (x6712)"
-                amount="$10,928.42"
-                description="Available Balance"
-                linkPath="/transactions"
-                transButton="View transactions"
-            />
-            <Account
-                title="Argent Bank Credit Card (x8349)"
-                amount="$184.30"
-                description="Current Balance"
-                linkPath="/transactions"
-                transButton="View transactions"
-            />
+
+            {data.map((item) => (
+                    
+                    <Account key={item.id} props={item}/>
+                ))}
+            
         </main>
             
             

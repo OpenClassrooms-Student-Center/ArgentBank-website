@@ -312,7 +312,7 @@ html {
   }
   
   .transaction-button {
-    display: block;
+    
     width: 100%;
     padding: 8px;
     font-size: 1.1rem;
@@ -321,6 +321,7 @@ html {
     border-color: #00bc77;
     background-color: #00bc77;
     color: #fff;
+    
   }
   
   @media (min-width: 720px) {
@@ -337,13 +338,17 @@ html {
     }
   }
   
-.greyForm {
+.grey-form {
   background-color: #d0d5d8;
 }
 
-.errorForm {
-  border: 2px solid red;
+.error-form {
+  border: 2px solid red ;
+  outline: none;
+
 }
+
+
 
 .main-nav-navlinks {
   display: flex;
@@ -351,10 +356,11 @@ html {
   gap: 8px;
 }
 
-.biggerFa {
+.bigger-fa {
   margin: 4px;
 }
 
 .error-text {
   color: red;
+  margin-top: 5px;
 }

@@ -39,7 +39,7 @@ export default function userReducer(state = initialState, action) {
 
         
           case U_RESOLVED: {
-                console.log()
+                
             
             draft.data = action.payload
             draft.firstName = action.payload.body.firstName
@@ -70,7 +70,7 @@ export default function userReducer(state = initialState, action) {
           return { ...state, userName: action.payload };
 
           case 'NO_USER_NAME':
-            console.log("erreur userNmae")
+            
             draft.userNameIsThere = false
             return;
           
@@ -102,7 +102,7 @@ export function fetchProfile(store) {
               });
           
           const data = await response.json();
-          console.log(data)
+          
           
           store.dispatch(userResolved(data));
           
@@ -127,11 +127,11 @@ export function updateProfile(store) {
         const userName = selectUser(store.getState()).userName;
         
         if (userName === '') {
-          console.log("17")
+          
           store.dispatch(noUserName)
 
         } else {
-          const response = await fetch(url, {
+          await fetch(url, {
             method: "PUT",
             headers: { "Content-Type": "application/json",
               "Authorization": "Bearer " + token },
@@ -141,7 +141,7 @@ export function updateProfile(store) {
 
             });
         
-        console.log(response)
+        
         }
 
         

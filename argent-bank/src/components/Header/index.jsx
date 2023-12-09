@@ -40,7 +40,7 @@ function Header() {
                     {!(useSelector(state => state.login.isConnected)) ? (
                     <NavLink to= "/signIn">
                         
-                        <span className="fa fa-user-circle right"></span>
+                        <span className="fa fa-user-circle right bigger-fa"></span>
                         Sign In
                         
                         
@@ -48,12 +48,12 @@ function Header() {
                     ) : (
                         <>
                             <NavLink className="main-nav-item" to="/profile">
-                                <i className="fa fa-user-circle biggerFa"></i>
+                                <i className="fa fa-user-circle bigger-fa"></i>
                                 {userName}
                             </NavLink>
                             
                             <NavLink onClick={handleSignOut} className="main-nav-item" to="/">
-                                <i className="fa fa-sign-out biggerFa"></i>
+                                <i className="fa fa-sign-out bigger-fa"></i>
                                 Sign Out
                         </NavLink>
                         </>
