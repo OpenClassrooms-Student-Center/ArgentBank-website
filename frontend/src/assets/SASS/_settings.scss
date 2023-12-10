@@ -46,6 +46,15 @@ html {
   
 .main {
     flex: 1;
+    padding: 48px auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
   }
 
-
+  .bg-dark {
+    background-color: #12002b;
+  }
