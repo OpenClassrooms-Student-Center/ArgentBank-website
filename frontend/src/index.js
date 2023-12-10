@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux'; // Import the Provider
-import store from '../../frontend/src/Components/redux/store/store'; // Import your Redux store (adjust the path as needed)
+import { store } from '../src/redux/store/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

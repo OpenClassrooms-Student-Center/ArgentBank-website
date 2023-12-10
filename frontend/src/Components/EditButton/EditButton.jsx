@@ -1,7 +1,7 @@
 // EditButton.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setEditProfile } from "../redux/reducers/profileSlice";
+import { setEditProfile } from "../../redux/reducers/profileSlice";
 import Button from "../Button/Button";
 import "../../Styles/Components/EditButton.css";
 
