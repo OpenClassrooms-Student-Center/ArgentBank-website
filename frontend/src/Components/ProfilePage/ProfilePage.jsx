@@ -4,6 +4,7 @@ import EditButton from '../EditButton/EditButton';
 import '../../Styles/Components/ProfilePage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Header/Header';
 
 function ProfilePage() {
   const { token } = useSelector((state) => state.auth);
@@ -52,8 +53,10 @@ function ProfilePage() {
   }
 
   return (
+
     <main className="main bg-dark">
     <div className="header">
+      
       <h1>Welcome back<br />{profileData.firstName + " " + profileData.lastName + "!"}</h1>
       <EditButton /> 
     </div>

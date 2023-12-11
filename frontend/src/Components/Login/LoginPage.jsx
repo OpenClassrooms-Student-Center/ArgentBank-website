@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../redux/reducers/authSlice';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ function LoginPage() {
       console.log(data);
       if (response.ok) {
         const userToken = data.body.token; 
-        const userData = { id: data.body.id, email: data.body.email }; 
+        const userData = { id: data.body.id, email: data.body.email, firstName: data.body.firstName }; 
         dispatch(setCredentials({ user: userData, token: userToken }));
         navigate(`/profile/${data.body.id}`); 
       } else {
@@ -37,7 +39,7 @@ function LoginPage() {
   return (
     <main className="main bg-dark">
     <section className="sign-in-content">
-      <i className="fa fa-user-circle sign-in-icon"></i>
+      <FontAwesomeIcon icon={faUserCircle} />
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">
