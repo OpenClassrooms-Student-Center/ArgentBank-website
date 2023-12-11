@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Importation correcte de useNavigate
-import { setEditProfile } from '../../redux/reducers/profileSlice';
 import Account from '../Account/Account'; 
 import EditButton from '../EditButton/EditButton'; 
 import '../../Styles/Components/ProfilePage.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
   const { token } = useSelector((state) => state.auth);
@@ -16,27 +15,36 @@ function ProfilePage() {
       navigate('/login');
       return;
     }
-
-    fetch('http://localhost:3001/api/v1/user/profile', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 200) {
-        setProfileData(data.body);
-      } else {
+  
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error('Profile fetch failed');
+        }
+  
+        const data = await response.json();
+        if (data.status === 200) {
+          setProfileData(data.body);
+          navigate(`/profile/${data.body.id}`);
+        } else {
+          navigate('/login');
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
         navigate('/login');
       }
-    })
-    .catch(error => {
-      console.error('Error fetching profile:', error);
-      navigate('/login');
-    });
+    };
+  
+    fetchData();
+  
   }, [token, navigate]);
 
   if (!profileData) {

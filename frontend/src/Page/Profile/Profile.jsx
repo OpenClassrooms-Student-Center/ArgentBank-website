@@ -5,12 +5,11 @@ import ProfilePage from '../../Components/ProfilePage/ProfilePage';
 
 function SignIn() {
   return (
-<>
-    <Header />
-    <ProfilePage />
-    <Footer />
-
-</>
+    <>
+      <Header />
+      <ProfilePage />
+      <Footer />
+    </>
   );
 }
 

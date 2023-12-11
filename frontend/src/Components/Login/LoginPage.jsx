@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -20,21 +21,19 @@ function LoginPage() {
       });
 
       const data = await response.json();
-
-     
-    if (response.ok) {
-      const userToken = data.token; // Le token renvoyé par l'API
-      const userData = { id: data.body.id, email: data.body.email }; // Les données utilisateur renvoyées par l'API
-      dispatch(setCredentials({ user: userData, token: userToken }));
-      navigate(`/profile/${data.body.id}`); // Modifier la redirection pour inclure l'ID de l'utilisateur
-    } else {
+      console.log(data);
+      if (response.ok) {
+        const userToken = data.body.token; 
+        const userData = { id: data.body.id, email: data.body.email }; 
+        dispatch(setCredentials({ user: userData, token: userToken }));
+        navigate(`/profile/${data.body.id}`); 
+      } else {
         alert(data.message);
       }
     } catch (error) {
-      alert('An error occurred during login');
+      alert('Une erreur s\'est produite lors de la connexion');
     }
   };
-
   return (
     <main className="main bg-dark">
     <section className="sign-in-content">

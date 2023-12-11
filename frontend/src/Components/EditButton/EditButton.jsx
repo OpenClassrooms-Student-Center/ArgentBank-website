@@ -10,7 +10,7 @@ function EditButton() {
   const [newUserName, setNewUserName] = useState("");
   const [error, setError] = useState("");
 
-  const token = useSelector((state) => state.userAuth.token);
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
   const handleEdit = () => {
