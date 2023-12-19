@@ -7,9 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/reducers/authSlice';
 
-
-function Header({firstName}) {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+function Header() {
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,9 +17,10 @@ function Header({firstName}) {
     dispatch(logout());
     navigate('/');
   };
+
   return (
     <nav className="main-nav">
-      <a className="main-nav-logo" onClick={() => navigate('/')}>
+      <a className="main-nav-logo" onClick={handleSignOut}> 
         <img
           className="main-nav-logo-image"
           src={Images}
@@ -30,11 +30,11 @@ function Header({firstName}) {
       <div>
         {isAuthenticated ? (
           <>
-              <FontAwesomeIcon icon={faUserCircle} /> {user.firstName}
-            <a className="main-nav-item" onClick={handleSignOut}>              
+            <FontAwesomeIcon icon={faUserCircle} />
+            {user.firstName}
+            <a className="main-nav-item" onClick={handleSignOut}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
             </a>
-            
           </>
         ) : (
           <a className="main-nav-item" href="/login">
@@ -44,7 +44,6 @@ function Header({firstName}) {
       </div>
     </nav>
   );
-
 }
 
 export default Header;

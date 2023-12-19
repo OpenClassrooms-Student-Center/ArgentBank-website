@@ -10,7 +10,7 @@ export const authSlice = createSlice({
        email: null,
     }, 
     token: null,
-    isAuthenticated: false,
+    isAuthenticated: true,
   },
   reducers: {
     setCredentials: (state, action) => {

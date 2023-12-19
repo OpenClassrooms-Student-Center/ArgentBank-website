@@ -9,12 +9,14 @@ function EditButton() {
   const [isEditing, setIsEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
   const [error, setError] = useState("");
+  const [newFirstName, setNewFirstName] = useState("");
+const [newLastName, setNewLastName] = useState("");
 
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
   const handleEdit = () => {
-    if (!newUserName.trim()) {
+    if (!newFirstName.trim() || !newLastName.trim()) {
       setError("The username cannot be empty.");
       return;
     }
@@ -26,7 +28,7 @@ function EditButton() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ userName: newUserName }),
+      body: JSON.stringify({ firstName: newFirstName, lastName: newLastName }),
     })
     .then(response => {
       if (!response.ok) {
@@ -35,7 +37,7 @@ function EditButton() {
       return response.json();
     })
     .then(data => {
-      dispatch(setEditProfile(data.userName));
+      dispatch(setEditProfile({ firstName: newFirstName, lastName: newLastName }));
       setIsEditing(false);
       setError("");
     })
@@ -49,18 +51,24 @@ function EditButton() {
     <div className="edit-button-container">
       {isEditing ? (
         <>
-          <input
-            type="text"
-            value={newUserName}
-            onChange={(e) => setNewUserName(e.target.value)}
-            placeholder="Enter new username"
-          />
-          {error && <p className="error-message">{error}</p>}
-          <Button onClick={handleEdit}>Save</Button>
-        </>
-      ) : (
-        <Button onClick={() => setIsEditing(true)}>Edit UserName</Button>
-      )}
+        <input
+          type="text"
+          value={newFirstName}
+          onChange={(e) => setNewFirstName(e.target.value)}
+          placeholder="Enter new first name"
+        />
+        <input
+          type="text"
+          value={newLastName}
+          onChange={(e) => setNewLastName(e.target.value)}
+          placeholder="Enter new last name"
+        />
+        {error && <p className="error-message">{error}</p>}
+        <Button onClick={handleEdit}>Save</Button>
+      </>
+    ) : (
+      <Button onClick={() => setIsEditing(true)}>Edit UserName</Button>
+    )}
     </div>
   );
 }

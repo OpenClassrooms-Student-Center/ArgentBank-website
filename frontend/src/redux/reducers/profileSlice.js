@@ -8,6 +8,8 @@ export const profileSlice = createSlice({
   reducers: {
     setEditProfile: (state, action) => {
       state.userData = action.payload;
+      state.userData.firstName = action.payload.firstName;
+      state.userData.lastName = action.payload.lastName;
     },
   },
 });
