@@ -10,7 +10,7 @@ export const authSlice = createSlice({
        email: null,
     }, 
     token: null,
-    isAuthenticated: true,
+    isAuthenticated: false,
   },
   reducers: {
     setCredentials: (state, action) => {
@@ -19,7 +19,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logout: (state) => {
-      state.user = {}; // Réinitialiser `user` à un objet vide
+      state.user = {}; 
       state.token = null;
       state.isAuthenticated = false;
     },
