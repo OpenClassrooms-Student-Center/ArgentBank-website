@@ -12,8 +12,10 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const handleSignOut = (event) => {
     event.preventDefault();
+    localStorage.removeItem('userToken');
     dispatch(logout());
     navigate('/');
   };

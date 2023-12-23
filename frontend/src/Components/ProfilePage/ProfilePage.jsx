@@ -34,6 +34,7 @@ function ProfilePage() {
         const data = await response.json();
         if (data.status === 200) {
           setProfileData(data.body);
+          localStorage.getItem('userToken');
           navigate(`/profile/${data.body.id}`);
         } else {
           navigate('/login');

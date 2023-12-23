@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +10,11 @@ function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleRememberMeChange = (event) => {
+    setRememberMe(event.target.checked);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,11 +27,13 @@ function LoginPage() {
       });
 
       const data = await response.json();
-      console.log(data);
       if (response.ok) {
         const userToken = data.body.token; 
         const userData = { id: data.body.id, email: data.body.email, firstName: data.body.firstName }; 
         dispatch(setCredentials({ user: userData, token: userToken }));
+        if (rememberMe) {
+          localStorage.setItem('userToken', userToken);
+        }
         navigate(`/profile/${data.body.id}`); 
       } else {
         alert(data.message);
@@ -36,28 +42,29 @@ function LoginPage() {
       alert('Une erreur s\'est produite lors de la connexion');
     }
   };
+
   return (
     <main className="main bg-dark">
-    <section className="sign-in-content">
-      <FontAwesomeIcon icon={faUserCircle} />
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="input-wrapper">
-          <label htmlFor="username">Username</label>
-          <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
-        <div className="input-wrapper">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </div>
-        <div className="input-remember">
-          <input type="checkbox" id="remember-me" />
-          <label htmlFor="remember-me">Remember me</label>
-        </div>
-        <button type="submit" className="sign-in-button">Sign In</button>
-      </form>
-    </section>
-  </main>
+      <section className="sign-in-content">
+        <FontAwesomeIcon icon={faUserCircle} />
+        <h1>Sign In</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="input-wrapper">
+            <label htmlFor="email">Username</label>
+            <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </div>
+          <div className="input-remember">
+            <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMeChange} />
+            <label htmlFor="remember-me">Remember me</label>
+          </div>
+          <button type="submit" className="sign-in-button">Sign In</button>
+        </form>
+      </section>
+    </main>
   );
 }
 
