@@ -4,11 +4,12 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     user: {
-       id: null,
-       firstName: null,
-       lastName: null,
-       email: null,
-    }, 
+      id: null,
+      firstName: null,
+      lastName: null,
+      email: null,
+      userName: null,
+    },
     token: null,
     isAuthenticated: false,
   },
@@ -23,9 +24,12 @@ export const authSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
     },
+    updateUserProfile: (state, action) => {
+      state.user.userName = action.payload.userName;
+    },
   },
 });
 
-export const { setCredentials, logout } = authSlice.actions;
+export const { setCredentials, logout, updateUserProfile } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -4,15 +4,17 @@ import EditButton from '../EditButton/EditButton';
 import '../../Styles/Components/ProfilePage.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Header/Header';
+import { logout } from '../../redux/reducers/authSlice'; // Importez l'action de déconnexion
 
 function ProfilePage() {
-  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState({ userName: '' });
 
   useEffect(() => {
+    const token = localStorage.getItem('userToken'); // Récupérez le token du localStorage
     if (!token) {
+      dispatch(logout());
       navigate('/login');
       return;
     }
@@ -28,40 +30,36 @@ function ProfilePage() {
         });
   
         if (!response.ok) {
-          throw new Error('Profile fetch failed');
+          localStorage.removeItem('userToken'); // Supprimer le token invalide
+          dispatch(logout());
+          navigate('/login');
+          return;
         }
   
         const data = await response.json();
         if (data.status === 200) {
           setProfileData(data.body);
-          localStorage.getItem('userToken');
-          navigate(`/profile/${data.body.id}`);
         } else {
           navigate('/login');
         }
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        console.error('Error:', error);
+        localStorage.removeItem('userToken'); // Supprimer le token en cas d'erreur
+        dispatch(logout());
         navigate('/login');
       }
     };
   
     fetchData();
-  
-  }, [token, navigate]);
-
-  if (!profileData) {
-    return <div>Loading...</div>;
-  }
+  }, [navigate, dispatch]);
 
   return (
-
     <main className="main bg-dark">
-    <div className="header">
-      
-      <h1>Welcome back<br />{profileData.firstName + " " + profileData.lastName + "!"}</h1>
-      <EditButton /> 
-    </div>
-    <h2 className="sr-only">Accounts</h2>
+      <div className="header">
+        <h1>Welcome back<br />{profileData.userName}!</h1>
+        <EditButton onProfileUpdate={setProfileData} />
+      </div>
+      <h2 className="sr-only">Accounts</h2>
     <Account
       title="Argent Bank Checking (x8349)"
       amount="$2,082.79"
@@ -80,6 +78,5 @@ function ProfilePage() {
   </main>
   );
 }
-
 
 export default ProfilePage;
