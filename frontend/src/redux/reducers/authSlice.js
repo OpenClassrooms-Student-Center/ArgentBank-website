@@ -9,6 +9,8 @@ export const authSlice = createSlice({
       lastName: null,
       email: null,
       userName: null,
+      rememberMe: false,
+
     },
     token: null,
     isAuthenticated: false,
@@ -18,6 +20,8 @@ export const authSlice = createSlice({
       state.user = action.payload.user; 
       state.token = action.payload.token;
       state.isAuthenticated = true;
+      state.rememberMe = action.payload.rememberMe; 
+
     },
     logout: (state) => {
       state.user = {}; 
@@ -27,9 +31,16 @@ export const authSlice = createSlice({
     updateUserProfile: (state, action) => {
       state.user.userName = action.payload.userName;
     },
+    checkRememberMe: (state) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        state.token = token;
+        state.isAuthenticated = true;
+      }
+    },
   },
 });
 
-export const { setCredentials, logout, updateUserProfile } = authSlice.actions;
+export const { setCredentials, logout, updateUserProfile, checkRememberMe } = authSlice.actions;
 
 export default authSlice.reducer;

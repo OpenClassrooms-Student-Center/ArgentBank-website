@@ -1,51 +1,57 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import '../../Styles/Components/Body.css';
-import Images from '../../Assets/Images/argentBankLogo.png';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../redux/reducers/authSlice';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { checkRememberMe, logout } from '../../redux/reducers/authSlice';
+import logo from "../../Assets/Images/argentBankLogo.png";
+import '../../Styles/Components/Header.css';
 
-function Header() {
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+export default function Header() {
+  const { isAuthenticated, rememberMe } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const profileData = useSelector((state) => state.profile);
 
-
-  const handleSignOut = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    if (!isAuthenticated && !rememberMe) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, rememberMe, navigate]);
+  const handleSignOut = () => {
     localStorage.removeItem('token');
     dispatch(logout());
     navigate('/login');
   };
 
+  const handleLogoClick = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/login');
+    }
+  };
+
   return (
-    <nav className="main-nav">
-      <a className="main-nav-logo" onClick={handleSignOut}> 
-        <img
-          className="main-nav-logo-image"
-          src={Images}
-          alt="Argent Bank Logo"
-        />
-      </a>
-      <div>
+    <header>
+      <nav className="main-nav">
+        <Link className="main-nav-logo" to="/" onClick={handleLogoClick}>
+          <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
+        </Link>
+
+        <div>
         {isAuthenticated ? (
-          <>
-            <FontAwesomeIcon icon={faUserCircle} />
-            {user.firstName}
-            <a className="main-nav-item" onClick={handleSignOut}>
-              <FontAwesomeIcon icon={faSignOutAlt} /> Sign Out
-            </a>
-          </>
-        ) : (
-          <a className="main-nav-item" href="/login">
-            <FontAwesomeIcon icon={faUserCircle} /> Sign In
-          </a>
-        )}
-      </div>
-    </nav>
+            <>
+<span>Welcome, {profileData.userName}!</span>
+
+              <Link className="main-nav-item" to="/" onClick={handleSignOut}>
+                Sign Out
+              </Link>
+            </>
+          ) : (
+            <Link className="main-nav-item" to="/login">
+              Sign In
+            </Link>
+          )}
+        </div>
+      </nav>
+    </header>
   );
 }
-
-export default Header;

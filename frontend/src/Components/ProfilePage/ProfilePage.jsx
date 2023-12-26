@@ -1,28 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Account from '../Account/Account'; 
-import EditButton from '../EditButton/EditButton'; 
-import '../../Styles/Components/ProfilePage.css';
-import {  useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../../redux/reducers/authSlice'; // Importez l'action de déconnexion
+import { logout } from '../../redux/reducers/authSlice';
+import EditButton from '../EditButton/EditButton';
+import Account from '../Account/Account';
 
 function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const tokenFromRedux = useSelector(state => state.auth.token);
-    const [profileData, setProfileData] = useState({ userName: '' });
+  const token = useSelector(state => state.auth.token) || localStorage.getItem('token');
+  const [profileData, setProfileData] = useState({ id: '', email: '' });
 
-    useEffect(() => {
-      const token = tokenFromRedux || localStorage.getItem('token');
-      if (!token) {
-        dispatch(logout());
-        navigate('/login');
-        return;
-      }
-    
 
-  
+
+  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/v1/user/profile', {
@@ -32,31 +24,48 @@ function ProfilePage() {
             'Content-Type': 'application/json'
           },
         });
-  
+    
         if (!response.ok) {
           localStorage.removeItem('token');
           dispatch(logout());
           navigate('/login');
           return;
         }
-        
-  
+    
         const data = await response.json();
         if (data.status === 200) {
-          setProfileData(data.body);
-        } else {
+          localStorage.setItem('profileData', JSON.stringify(data.body));
+          setProfileData({ id: data.body.id, email: data.body.email });
+                } else {
           navigate('/login');
         }
+
+        const savedProfileData = localStorage.getItem('profileData');
+        if (savedProfileData) {
+          setProfileData(JSON.parse(savedProfileData));
+        } else if (token) {
+          fetchData();
+        } else {
+          dispatch(logout());
+          navigate('/login');
+        }
+
+            if (!token) {
+      localStorage.removeItem('profileData');
+      dispatch(logout());
+      navigate('/login');
+      return;
+    }
       } catch (error) {
         console.error('Error:', error);
-        localStorage.removeItem('userToken'); // Supprimer le token en cas d'erreur
+        localStorage.removeItem('token');
         dispatch(logout());
         navigate('/login');
       }
     };
-  
+    
     fetchData();
-  }, [tokenFromRedux, navigate, dispatch]);
+  }, [token, navigate, dispatch]);
 
   return (
     <main className="main bg-dark">
@@ -65,22 +74,22 @@ function ProfilePage() {
         <EditButton onProfileUpdate={setProfileData} />
       </div>
       <h2 className="sr-only">Accounts</h2>
-    <Account
-      title="Argent Bank Checking (x8349)"
-      amount="$2,082.79"
-      description="Available Balance"
-    />
-    <Account
-      title="Argent Bank Savings (x6712)"
-      amount="$10,928.42"
-      description="Available Balance"
-    />
-    <Account
-      title="Argent Bank Credit Card (x8349)"
-      amount="$184.30"
-      description="Current Balance"
-    />
-  </main>
+      <Account
+        title="Argent Bank Checking (x8349)"
+        amount="$2,082.79"
+        description="Available Balance"
+      />
+      <Account
+        title="Argent Bank Savings (x6712)"
+        amount="$10,928.42"
+        description="Available Balance"
+      />
+      <Account
+        title="Argent Bank Credit Card (x8349)"
+        amount="$184.30"
+        description="Current Balance"
+      />
+    </main>
   );
 }
 

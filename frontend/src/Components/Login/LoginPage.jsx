@@ -28,14 +28,14 @@ function LoginPage() {
 
       const data = await response.json();
       if (response.ok) {
-        const token = data.body.token; 
-        const userData = { id: data.body.id, email: data.body.email, firstName: data.body.firstName }; 
+        const token = data.body.token;
+        const userData = { id: data.body.id, email: data.body.email, firstName: data.body.firstName };
         dispatch(setCredentials({ user: userData, token: token }));
         if (rememberMe) {
-  localStorage.setItem('token', token);
-}
+          localStorage.setItem('token', token);
+        }
 
-        navigate(`/profile/${data.body.id}`); 
+        navigate(`/profile/${data.body.id}`);
       } else {
         alert(data.message);
       }
