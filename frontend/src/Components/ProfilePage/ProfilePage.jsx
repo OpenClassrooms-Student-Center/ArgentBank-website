@@ -2,22 +2,26 @@ import React, { useEffect, useState } from 'react';
 import Account from '../Account/Account'; 
 import EditButton from '../EditButton/EditButton'; 
 import '../../Styles/Components/ProfilePage.css';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../redux/reducers/authSlice'; // Importez l'action de déconnexion
 
 function ProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [profileData, setProfileData] = useState({ userName: '' });
+  const tokenFromRedux = useSelector(state => state.auth.token);
+    const [profileData, setProfileData] = useState({ userName: '' });
 
-  useEffect(() => {
-    const token = localStorage.getItem('userToken'); // Récupérez le token du localStorage
-    if (!token) {
-      dispatch(logout());
-      navigate('/login');
-      return;
-    }
+    useEffect(() => {
+      const token = tokenFromRedux || localStorage.getItem('token');
+      if (!token) {
+        dispatch(logout());
+        navigate('/login');
+        return;
+      }
+    
+
   
     const fetchData = async () => {
       try {
@@ -30,11 +34,12 @@ function ProfilePage() {
         });
   
         if (!response.ok) {
-          localStorage.removeItem('userToken'); // Supprimer le token invalide
+          localStorage.removeItem('token');
           dispatch(logout());
           navigate('/login');
           return;
         }
+        
   
         const data = await response.json();
         if (data.status === 200) {
@@ -51,7 +56,7 @@ function ProfilePage() {
     };
   
     fetchData();
-  }, [navigate, dispatch]);
+  }, [tokenFromRedux, navigate, dispatch]);
 
   return (
     <main className="main bg-dark">

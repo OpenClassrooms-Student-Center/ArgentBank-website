@@ -15,9 +15,9 @@ function Header() {
 
   const handleSignOut = (event) => {
     event.preventDefault();
-    localStorage.removeItem('userToken');
+    localStorage.removeItem('token');
     dispatch(logout());
-    navigate('/');
+    navigate('/login');
   };
 
   return (
