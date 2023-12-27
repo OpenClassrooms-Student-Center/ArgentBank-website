@@ -1,6 +1,6 @@
 // FormUserName.jsx
 import { useDispatch, useSelector} from 'react-redux'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 import {  useUpdateUserMutation} from '../../features/User/UserApiSlice.js'
@@ -15,6 +15,11 @@ const FormUserName = ({setIsOpen}) => {
 
     const [ updateUser ] = useUpdateUserMutation();
     const [updatedUsername, setUpdatedUsername] = useState();
+
+
+    useEffect(() => {
+        setUpdatedUsername(username ? username : '');
+    }, [username]);
 
 
     const handleSubmit = async (e) => { 

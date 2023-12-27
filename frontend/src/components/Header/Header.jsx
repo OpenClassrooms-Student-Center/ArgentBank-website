@@ -14,13 +14,9 @@ const Header = () => {
 
     const token = useSelector(selectCurrendToken);
     
-
     const [isConnected, setIsConnected] = useState(true);
-
      const firstName = useSelector(selectCurrentFirstname);
-
      const dispatch = useDispatch();
-
      const handleLogout = () => {
             setIsConnected(false);
             dispatch(logOut());
