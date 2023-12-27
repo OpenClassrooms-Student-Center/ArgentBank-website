@@ -13,37 +13,35 @@ function EditButton({ onProfileUpdate }) {
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     if (!newUserName.trim()) {
       setError("Username cannot be empty.");
       return;
     }
 
-    // Appel API pour mise à jour
-    fetch("http://localhost:3001/api/v1/user/profile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ userName: newUserName }),
-    })
-    .then(response => {
+    try {
+      const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`, // Assurez-vous que le token est correct
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userName: newUserName }),
+      });
+
       if (!response.ok) {
         throw new Error("Failed to update username.");
       }
-      return response.json();
-    })
-    .then(data => {
+
+      const data = await response.json();
       dispatch(setEditProfile({ userName: newUserName }));
       onProfileUpdate({ userName: newUserName }); // Mise à jour du profil
       setIsEditing(false);
       setError("");
-    })
-    .catch(error => {
+    } catch (error) {
       console.error("Error:", error);
       setError("Error updating username.");
-    });
+    }
   };
 
   return (

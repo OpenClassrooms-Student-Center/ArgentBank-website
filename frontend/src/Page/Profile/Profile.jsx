@@ -10,7 +10,6 @@ function UserProfile() {
 
   return (
     <>
-      <Header firstName={firstName} />
       <ProfilePage />
       <Footer />
     </>
