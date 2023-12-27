@@ -1,6 +1,6 @@
-import { useDispatch, useSelector} from 'react-redux'
-import { useRef, useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 // REDUX
 import { setCredentials } from '../features/auth/authSlice'
 import { useLoginMutation } from '../features/auth/authApiSlice'
@@ -9,10 +9,10 @@ import { useLoginMutation } from '../features/auth/authApiSlice'
 const SignIn = () => {
 
 
-  const userRef = useRef()
-  const errRef = useRef()
-  const [email, setEmail] = useState('steve@rogers.com')
-  const [pwd, setPwd] = useState('password456')
+
+
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
   const navigate = useNavigate()
 
@@ -39,7 +39,6 @@ const SignIn = () => {
       } catch (err) {
           if (!err?.originalStatus) {
               setErrMsg('Pas de réponse du serveur');
-              console.error(`[LOGIN]`,err);
           } else if (err.originalStatus === 400) {
               setErrMsg(`Email ou le mot de passe manquant`);
           } else if (err.originalStatus === 401) {
@@ -47,7 +46,6 @@ const SignIn = () => {
           } else {
               setErrMsg('Email ou le mot de passe incorrect');
           }
-          errRef.current.focus();
       }
   }
 
@@ -64,17 +62,19 @@ const SignIn = () => {
           <i className="fa fa-user-circle sign-in-icon"/>
           <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
-            <div className="input-wrapper">
-              <label htmlFor="email">
-                Email
-                <input type="text" id="email" onChange={handleEmailInput} value={email}/>
-                </label>
-            </div>
-            <div className="input-wrapper">
-              <label htmlFor="password">
-                Password
-              <input type="password" id="password" onChange={handlePwdInput} value={pwd}/>
-                </label>
+            <div className="sign-in-input-container">
+              <div className="input-wrapper">
+                <label htmlFor="email">
+                  Email
+                  <input type="text" id="email" onChange={handleEmailInput} value={email} required/>
+                  </label>
+              </div>
+              <div className="input-wrapper">
+                <label htmlFor="password">
+                  Password
+                <input type="password" id="password" onChange={handlePwdInput} value={pwd} required/>
+                  </label>
+              </div>
             </div>
             <div className="input-remember">
               <label htmlFor="remember-me">
@@ -82,6 +82,7 @@ const SignIn = () => {
                 Remember me
               </label>
             </div>
+                    {errMsg && <p className="error-message">{errMsg}</p>}
 
           <button className="sign-in-button">Sign In</button>
           </form>

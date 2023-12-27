@@ -1,3 +1,4 @@
+// FormUserName.jsx
 import { useDispatch, useSelector} from 'react-redux'
 import { useState } from "react";
 
@@ -13,7 +14,7 @@ const FormUserName = ({setIsOpen}) => {
     const dispatch = useDispatch();
 
     const [ updateUser ] = useUpdateUserMutation();
-    const [updatedUsername, setUpdatedUsername] = useState(username);
+    const [updatedUsername, setUpdatedUsername] = useState(username || '');
 
 
     const handleSubmit = async (e) => { 

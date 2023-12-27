@@ -6,14 +6,9 @@ const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:3001/api/v1/user',
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.token;
-        console.log('/////////////')
-        console.log('[API] token getstate:',token);
         if (token) {
-            console.log('[API] token headers:',token);
             headers.set('Authorization', `Bearer ${token}`);
         }
-        console.log('/////////////')
-
         return headers;
     }
 });
@@ -21,7 +16,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReAuth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
     if (result?.error?.status === 401 || result?.error?.status === 403) {
-      console.log("[API]Envoi nouveau tokenn");
+      console.log("[API]Envoi nouveau token");
   
       const refreshResult = await baseQuery(
         { url: "/refresh", method: "POST" },
