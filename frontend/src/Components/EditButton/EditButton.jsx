@@ -4,7 +4,6 @@ import { setEditProfile } from "../../redux/reducers/profileSlice";
 import Button from "../Button/Button";
 import "../../Styles/Components/EditButton.css";
 import TextInput from "../TextInput/TextInput";
-
 function EditButton({ onProfileUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
@@ -38,7 +37,6 @@ function EditButton({ onProfileUpdate }) {
       onProfileUpdate({ userName: newUserName });
       setIsEditing(false);
       setError("");
-      
     } catch (error) {
       console.error("Error:", error);
       setError(error.message || "Error updating username.");

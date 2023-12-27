@@ -9,9 +9,9 @@ import { faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const { user: { rememberMe } } = useSelector((state) => state.auth);
+  const { user: { rememberMe, firstName } } = useSelector((state) => state.auth);
 
-  const profileData = useSelector((state) => state.profile);
+  const profileData = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ export default function Header() {
     navigate('/login');
   };
 
-  const userName = profileData.userName ;
+  const userName = firstName || 'Guest'; // Utilisez firstName au lieu de userName
   const userId = profileData.id;
 
   return (
@@ -42,14 +42,18 @@ export default function Header() {
         <Link className="main-nav-logo" to="/" onClick={handleLogoClick}>
           <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
         </Link>
-
+  
         <div>
           {isAuthenticated ? (
             <>
               <FontAwesomeIcon icon={faUser} />
-              <Link className='main-nav-item' to={`/profile/${userId}`}>
-                {profileData.userName} {/* Affichez le nom d'utilisateur ici */}
-              </Link>
+              {userName ? ( 
+                <Link className='main-nav-item' to={`/profile/${userId}`}>
+                  {userName}
+                </Link>
+              ) : (
+                <span className='main-nav-item'>Guest</span>
+              )}
               <Link className="main-nav-item" to="/" onClick={handleSignOut}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 Sign Out

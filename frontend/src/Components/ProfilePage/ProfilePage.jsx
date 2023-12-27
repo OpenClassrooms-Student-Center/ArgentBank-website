@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom'; // Importez useParams depuis 'react-router-dom'
-import { logout, checkRememberMe } from '../../redux/reducers/authSlice'; // Importez checkRememberMe depuis votre authSlice
+import { useNavigate, useParams } from 'react-router-dom';
+import { logout, checkRememberMe } from '../../redux/reducers/authSlice';
 import EditButton from '../EditButton/EditButton';
 import Account from '../Account/Account';
 import Header from '../../Components/Header/Header';
@@ -13,27 +13,21 @@ function ProfilePage() {
   const [profileData, setProfileData] = useState({ id: '', email: '', userName: '' });
   const [isLoading, setIsLoading] = useState(true);
 
-  // Utilisez useParams pour obtenir l'userId de l'URL
   const { userId } = useParams();
 
   useEffect(() => {
-    // Vérifiez d'abord si l'utilisateur est connecté
     if (!token) {
-      // S'il n'y a pas de token, déconnectez l'utilisateur
       dispatch(logout());
       navigate('/login');
     } else {
-      // Si l'utilisateur est connecté, vérifiez "remember me"
-      dispatch(checkRememberMe()); // Utilisez l'action checkRememberMe pour récupérer le token si "remember me" est coché
+      dispatch(checkRememberMe());
 
-      // Ensuite, utilisez le token et l'userId pour obtenir les informations du profil
       fetchData();
     }
   }, [token, dispatch, navigate]);
 
   const fetchData = async () => {
     try {
-      // Utilisez userId dans l'URL pour la requête
       const response = await fetch(`http://localhost:3001/api/v1/user/profile`, {
         method: 'POST', 
         headers: {
@@ -53,9 +47,6 @@ function ProfilePage() {
           email: data.body.email,
           userName: data.body.userName
         });
-  
-        // Redirigez vers la page de profil avec l'userId
-        navigate(`/profile/${data.body.id}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -69,7 +60,7 @@ function ProfilePage() {
   
   return (
     <>
-      <Header />
+      <Header userName={profileData.userName} /> 
       <main className="main bg-dark">
         <div className="header">
           {isLoading ? (

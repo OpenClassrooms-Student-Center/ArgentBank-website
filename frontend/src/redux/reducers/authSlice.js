@@ -23,10 +23,6 @@ export const authSlice = createSlice({
       state.rememberMe = action.payload.rememberMe; 
 
     },
-    initializeAuth: (state) => {
-      const token = localStorage.getItem('token');
-      state.isAuthenticated = !!token;
-    },
     logout: (state) => {
       state.user = {}; 
       state.token = null;
@@ -45,6 +41,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {initializeAuth, setCredentials, logout, updateUserProfile, checkRememberMe } = authSlice.actions;
+export const { setCredentials, logout, updateUserProfile, checkRememberMe } = authSlice.actions;
 
 export default authSlice.reducer;

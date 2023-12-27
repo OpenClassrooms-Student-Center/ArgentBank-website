@@ -27,7 +27,7 @@ function LoginPage() {
       });
 
       const data = await response.json();
-      if (response.ok) {
+            if (response.ok) {
         const token = data.body.token;
         const userData = { id: data.body.id, email: data.body.email, firstName: data.body.firstName };
         dispatch(setCredentials({ user: userData, token: token }));
