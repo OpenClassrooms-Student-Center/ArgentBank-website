@@ -1,6 +1,117 @@
-   ////// MEDIA 920PX /////////
+     ////// MEDIA 320 PX /////////
 
-@media (min-width: 920px) {
+
+     @media screen and (min-width: 320px){
+ 
+      .header-nav{
+        padding: 5px 10px;
+        .header-nav-logo{
+          width: 40%;
+          
+        }
+      }
+      .user {
+  
+        .header{
+          
+          .user_form-container{
+            width: 100%;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .user_form_buttons-container{
+              flex-direction: column;
+              padding: 15px;
+              justify-content: space-between;
+              gap: 10px;
+            }
+          }
+        }
+      }
+      .account{
+        width: 100%;
+      }
+    }
+
+    ////// MEDIA 400 PX /////////
+
+    @media screen and (min-width: 400px) {
+
+    .header-nav{
+      padding: 5px 15px;
+    }
+    .header-list-container{
+      display: flex;
+      flex-direction: row;
+  align-items: center;      
+    }
+    .header-list-container:first-child{
+      margin-bottom: 5px;
+    }
+    
+    .account{
+      width: 100%;
+    }
+    .user .header{
+
+      .user_form-container{
+        width: 50%;
+        max-width: 360px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .user_form_buttons-container{
+          flex-direction: row;
+          padding: 15px auto;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          .user_form-button{
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
+    
+
+  
+         ////// MEDIA 720 PX /////////
+  @media screen and (min-width: 720px) {
+    .header-nav{
+      padding: 5px 20px;
+
+      .header-nav-logo{
+        width: 50%;
+      }
+      .header-list-container{
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    .account {
+      flex-direction: row;
+    }
+  
+    .account-content-wrapper.cta {
+      flex: 0;
+    }
+  
+    .transaction-button {
+      width: 200px;
+    }
+  }
+
+
+
+
+
+   
+////// MEDIA 920PX /////////
+
+@media screen and (min-width: 920px) {
     .hero {
       height: 400px;
       background-position: 0% 33%;
@@ -29,45 +140,3 @@
   
   
   
-   ////// MEDIA 720 PX /////////
-  @media (min-width: 720px) {
-    .account {
-      flex-direction: row;
-    }
-  
-    .account-content-wrapper.cta {
-      flex: 0;
-    }
-  
-    .transaction-button {
-      width: 200px;
-    }
-  }
-
-
-     ////// MEDIA 400 PX /////////
-
-  @media (max-width: 400px) {
-    
-    .header-list-container{
-      display: flex;
-      flex-direction: column;
-      white-space: nowrap;
-    }
-    .header-list-container:first-child{
-      margin-bottom: 5px;
-    }
-    .header-nav-signout{
-      font-size: 12px;
-    }
-
-  }
-
-
-     ////// MEDIA 325 PX /////////
-
-
-  @media(max-wdth:325px){
- 
-  }
-   

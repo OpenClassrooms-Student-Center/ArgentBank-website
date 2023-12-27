@@ -11,8 +11,8 @@ const SignIn = () => {
 
 
 
-  const [email, setEmail] = useState('')
-  const [pwd, setPwd] = useState('')
+  const [email, setEmail] = useState('steve@rogers.com')
+  const [pwd, setPwd] = useState('password456')
   const [errMsg, setErrMsg] = useState('')
   const navigate = useNavigate()
 

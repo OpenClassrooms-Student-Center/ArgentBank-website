@@ -17,21 +17,21 @@
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
   }
-  
+
   .header-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
   }
-  
+
   .header-nav a ,
   .header-list-container a,
   .header-nav-signout{
     font-weight: bold;
     color: #2c3e50;
   }
-  
+
   .header-nav a.router-link-exact-active {
     color: #42b983;
   }
@@ -40,22 +40,22 @@
     display: flex;
     flex-direction: row;
   }
-  
+
   .header-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
   }
-  
+
   .header-nav-item:hover,
   .header-nav-signout-text:hover {
     text-decoration: underline;
   }
-  
+
   .header-nav-logo {
     display: flex;
     align-items: center;
   }
-  
+
   .header-nav-logo-image {
     max-width: 100%;
     width: 200px;
@@ -68,8 +68,13 @@
 
   .header-nav-profile{
     margin-right: 10px;
+    font-weight: bold;
+    font-size: 1rem;
   }
 
+  .header-nav-signout{
+    font-size: 0.8rem;
+  }
 
   ///// PROBLEME D'ESPACE ENTRE LOGO PRENOM / PRENOM / LOGO SIGN OUT ET SIGN OUT
     // FOOTER //
