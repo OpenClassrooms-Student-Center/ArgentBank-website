@@ -47,13 +47,9 @@ export default function Header() {
           {isAuthenticated ? (
             <>
               <FontAwesomeIcon icon={faUser} />
-              {userName ? ( 
-                <Link className='main-nav-item' to={`/profile/${userId}`}>
-                  {userName}
-                </Link>
-              ) : (
-                <span className='main-nav-item'>Guest</span>
-              )}
+              <Link className='main-nav-item' to={`/profile/${userId}`}>
+                {profileData.userName} 
+              </Link>
               <Link className="main-nav-item" to="/" onClick={handleSignOut}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 Sign Out
