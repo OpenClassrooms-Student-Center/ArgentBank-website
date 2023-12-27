@@ -5,9 +5,7 @@ import { logout } from '../../redux/reducers/authSlice';
 import logo from "../../Assets/Images/argentBankLogo.png";
 import '../../Styles/Components/Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faRightFromBracket  } from '@fortawesome/free-solid-svg-icons';
-import SignIn from '../../Page/Signin/Signin';
-
+import { faUser, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -17,17 +15,14 @@ export default function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-  }); 
   const handleLogoClick = () => {
     const token = localStorage.getItem('token');
 
     if (token && rememberMe) {
-      dispatch(SignIn()); 
       navigate('/profile');
     } else if (!token) {
       localStorage.removeItem('token');
-      dispatch(logout()); 
+      dispatch(logout());
       navigate('/');
     }
   };
@@ -38,27 +33,23 @@ export default function Header() {
     navigate('/login');
   };
 
-
-  
-
-  const userName = profileData.userName || 'Guest'; 
-  const userId = profileData.id; 
+  const userName = profileData.userName ;
+  const userId = profileData.id;
 
   return (
     <header>
       <nav className="main-nav">
-      <Link className="main-nav-logo" to="/" onClick={handleLogoClick}>
-  <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
-</Link>
-
-
+        <Link className="main-nav-logo" to="/" onClick={handleLogoClick}>
+          <img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
+        </Link>
 
         <div>
           {isAuthenticated ? (
             <>
               <FontAwesomeIcon icon={faUser} />
-              <Link to={`/profile/${userId}`}>{profileData.userName}</Link>
-              <span className='main-nav-item'>{userName}</span>
+              <Link className='main-nav-item' to={`/profile/${userId}`}>
+                {profileData.userName} {/* Affichez le nom d'utilisateur ici */}
+              </Link>
               <Link className="main-nav-item" to="/" onClick={handleSignOut}>
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 Sign Out

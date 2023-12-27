@@ -7,9 +7,8 @@ import TextInput from "../TextInput/TextInput";
 
 function EditButton({ onProfileUpdate }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [newUserName, setNewUserName] = useState(""); // État pour le userName
+  const [newUserName, setNewUserName] = useState("");
   const [error, setError] = useState("");
-
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
@@ -23,24 +22,26 @@ function EditButton({ onProfileUpdate }) {
       const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`, // Assurez-vous que le token est correct
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userName: newUserName }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update username.");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update username.");
       }
 
       const data = await response.json();
       dispatch(setEditProfile({ userName: newUserName }));
-      onProfileUpdate({ userName: newUserName }); // Mise à jour du profil
+      onProfileUpdate({ userName: newUserName });
       setIsEditing(false);
       setError("");
+      
     } catch (error) {
       console.error("Error:", error);
-      setError("Error updating username.");
+      setError(error.message || "Error updating username.");
     }
   };
 
