@@ -1,0 +1,60 @@
+// COLOR
+
+$color-primary: #f9f9f9;
+$color-secondary: #f9f9f9;
+$color-text-primary: #2c3e50;
+$color-text-secondary: #f9f9f9;
+$color-BG-primary: #FFF;
+$color-BG-secondary: #f9f9f9;
+
+
+// FONT
+
+$font-primary: "Avenir", Helvetica, Arial, sans-serif;
+$font-size-primary: 1rem;
+$font-size-secondary: 1rem;
+
+// SETTINGS
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    background-color: $color-BG-primary;
+    font-family: $font-primary;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+ul li{
+    list-style: none;
+}
+a,a:visited{
+    text-decoration: none;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
+  
+.main {
+    flex: 1;
+    padding: 48px auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .bg-dark {
+    background-color: #12002b;
+  }
