@@ -10,6 +10,9 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import "./assets/css/main.css";
+import SignIn from "./pages/SignIn/SignIn";
+import User from "./pages/User/User";
+
 const root = document.getElementById("root");
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
@@ -18,6 +21,8 @@ ReactDOM.createRoot(root).render(
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/sign-in" element={<SignIn />}></Route>
+          <Route path="/user" element={<User />}></Route>
         </Routes>
         <Footer />
       </Router>
