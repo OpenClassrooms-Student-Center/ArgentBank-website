@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+// import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
+// import { store } from "./redux";
+
 // import App from "./App";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -10,6 +13,7 @@ import "./assets/css/main.css";
 const root = document.getElementById("root");
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
+    {/* <Provider store={store}> */}
     <Router>
       <Header />
       <Routes>
@@ -17,6 +21,7 @@ ReactDOM.createRoot(root).render(
       </Routes>
       <Footer />
     </Router>
+    {/* </Provider> */}
   </React.StrictMode>
 );
 
