@@ -8,7 +8,7 @@ export async function CallLogin(username, password, setIdToken, setUserInfo) {
   const urlProfile = `${API}/profile`;
   //   const [idToken, setIdToken] = useState("");
   //   const [userInfo, setUserInfo] = useState([]);
-  console.log(username, password);
+  // console.log(username, password);
 
   //   useEffect(() => {
   //     if (idToken && userInfo.length > 0) {
@@ -30,8 +30,8 @@ export async function CallLogin(username, password, setIdToken, setUserInfo) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      console.log(data.body.token);
+      // console.log(data);
+      // console.log(data.body.token);
       const token = data.body.token;
       setIdToken(token);
       //   dispatch(logUser({ token: token }));
@@ -45,8 +45,8 @@ export async function CallLogin(username, password, setIdToken, setUserInfo) {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      console.log(data.body);
+      // console.log(data);
+      // console.log(data.body);
       setUserInfo([data.body]);
     })
     .catch((error) => console.error("Error:", error));

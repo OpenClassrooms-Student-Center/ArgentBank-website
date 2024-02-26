@@ -2,10 +2,7 @@ import argentBankLogo from "./../../assets/img/argentBankLogo.png";
 import { useSelector } from "react-redux";
 
 function Header() {
-  const userinfo = useSelector((state) => state.logUser);
-
-  console.log(userinfo);
-
+  const userData = useSelector((state) => state.user);
   return (
     <header id="header">
       <nav className="main-nav">
@@ -17,11 +14,11 @@ function Header() {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </a>
-        {userinfo ? (
+        {userData.isLogged ? (
           <div>
             <a className="main-nav-item" href="./sign-in">
               <i className="fa fa-user-circle"></i>
-              en ligne
+              {userData.userinfo[0].userName}
             </a>
           </div>
         ) : (
