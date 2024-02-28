@@ -18,6 +18,9 @@ const userSlice = createSlice({
       state.token = "";
       state.userinfo = [];
     },
+    changeUsername: (state, action) => {
+      state.userinfo.userName = action.payload.userName;
+    },
   },
 });
 

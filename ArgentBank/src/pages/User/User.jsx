@@ -1,14 +1,30 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import CallChangeName from "./../../CallAPI/CallChangeName.jsx";
 
 function User() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user);
+  const [showInput, setShowInput] = useState(false);
+
+  const editButtonClick = () => {
+    setShowInput(true);
+  };
+
+  const okButtonClick = () => {
+    setShowInput(false);
+    const inputValue = document.getElementById("inputChangeName").value;
+    CallChangeName(inputValue, userData.token);
+    dispatch({ type: "changeUsername", payload: { userName: inputValue } });
+    console.log(userData);
+  };
 
   useEffect(() => {
     if (!userData.isLogged) {
-      navigate("/");
+      navigate("/sign-in");
     }
   }, [userData.isLogged, navigate]);
 
@@ -21,7 +37,15 @@ function User() {
             <br />
             {`${userData.userinfo[0].firstName} ${userData.userinfo[0].lastName}`}
           </h1>
-          <button className="edit-button">Edit Name</button>
+          <button onClick={editButtonClick} className="edit-button">
+            Edit Name
+          </button>
+          {showInput && (
+            <>
+              <input id="inputChangeName" type="text" />{" "}
+              <button onClick={okButtonClick}>Ok</button>
+            </>
+          )}
         </div>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
