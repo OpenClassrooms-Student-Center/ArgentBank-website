@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 function Header() {
   const userData = useSelector((state) => state.user);
-  console.log(userData.userName);
   return (
     <header id="header">
       <nav className="main-nav">
