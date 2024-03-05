@@ -1,0 +1,47 @@
+.modalInput {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 0px 20px 20px 20px;
+  border-radius: 8px;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.14);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.14);
+}
+
+.modalHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.modalBody {
+  display: flex;
+  margin: auto;
+  gap: 20px;
+}
+
+.closeModalButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modalTitle {
+  color: black;
+  font-size: 18px;
+}
+
+.buttonValidModal {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background-color: #00bc77;
+  color: #fff;
+  font-size: 1.1rem !important;
+  font-weight: bold;
+}

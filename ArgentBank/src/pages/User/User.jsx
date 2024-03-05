@@ -3,23 +3,41 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import CallChangeName from "./../../CallAPI/CallChangeName.jsx";
+import CallUserInfo from "../../CallAPI/CallUserInfo.jsx";
+import { logUser } from "../../redux.js";
+import "./User.css";
 
 function User() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user);
   const [showInput, setShowInput] = useState(false);
+  const [userInfo, setUserInfo] = useState([]);
+
+  useEffect(() => {
+    if (userData.token && userInfo.length > 0) {
+      console.log(userInfo[0]);
+      dispatch(logUser({ token: userData.token, userinfo: userInfo }));
+    }
+  }, [userInfo, dispatch, userData.token]);
 
   const editButtonClick = () => {
     setShowInput(true);
   };
 
   const okButtonClick = () => {
-    setShowInput(false);
     const inputValue = document.getElementById("inputChangeName").value;
-    CallChangeName(inputValue, userData.token);
-    dispatch({ type: "changeUsername", payload: { userName: inputValue } });
-    console.log(userData);
+    if (inputValue === "") {
+      alert("Veuillez entrer un nom d'utilisateur");
+    } else {
+      setShowInput(false);
+      CallChangeName(inputValue, userData.token).then(() =>
+        CallUserInfo(userData.token, setUserInfo)
+      );
+
+      dispatch({ type: "changeUsername", payload: { userName: inputValue } });
+      console.log(userData);
+    }
   };
 
   useEffect(() => {
@@ -42,8 +60,27 @@ function User() {
           </button>
           {showInput && (
             <>
-              <input id="inputChangeName" type="text" />{" "}
-              <button onClick={okButtonClick}>Ok</button>
+              <div className="modalInput">
+                <div className="modalHead">
+                  <h2 className="modalTitle">
+                    {"Entrez votre nouveau nom d'utilisateur"}
+                  </h2>
+                  <button
+                    onClick={() => {
+                      setShowInput(false);
+                    }}
+                    className="closeModalButton"
+                  >
+                    X
+                  </button>
+                </div>
+                <div className="modalBody">
+                  <input id="inputChangeName" type="text" />{" "}
+                  <button className="edit-button" onClick={okButtonClick}>
+                    Ok
+                  </button>
+                </div>
+              </div>
             </>
           )}
         </div>
