@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import argentBankLogo from "./../../assets/img/argentBankLogo.png";
+import argentBankLogo from "./../../assets/img/argentBankLogo.webp";
 import { useSelector } from "react-redux";
 
 function Header() {
