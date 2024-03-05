@@ -13,10 +13,13 @@ const userSlice = createSlice({
       state.token = action.payload.token;
       state.userinfo = action.payload.userinfo;
     },
-    logOutUser: (state, action) => {
+    logOutUser: (state) => {
       state.isLogged = false;
       state.token = "";
       state.userinfo = [];
+    },
+    changeUsername: (state, action) => {
+      state.userinfo.userName = action.payload.userName;
     },
   },
 });
