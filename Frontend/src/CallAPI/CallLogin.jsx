@@ -1,7 +1,13 @@
 import { API } from "./API.jsx";
 import CallUserInfo from "./CallUserInfo.jsx";
 
-export async function CallLogin(username, password, setIdToken, setUserInfo) {
+export async function CallLogin(
+  username,
+  password,
+  setIdToken,
+  setUserInfo,
+  setResponseCode
+) {
   const urlLogin = `${API}/login`;
 
   fetch(`${urlLogin}`, {
@@ -17,9 +23,14 @@ export async function CallLogin(username, password, setIdToken, setUserInfo) {
   })
     .then((response) => response.json())
     .then((data) => {
-      const token = data.body.token;
-      setIdToken(token);
-      CallUserInfo(token, setUserInfo);
+      try {
+        setResponseCode(data.status);
+        const token = data.body.token;
+        setIdToken(token);
+        CallUserInfo(token, setUserInfo);
+      } catch (error) {
+        setResponseCode(data.status);
+      }
     });
 }
 

@@ -1,0 +1,24 @@
+.errorTxt {
+  color: red;
+  animation: error 0.3s ease-in-out;
+}
+
+@keyframes error {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

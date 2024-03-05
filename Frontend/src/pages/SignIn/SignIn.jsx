@@ -4,26 +4,66 @@ import CallLogin from "./../../CallAPI/CallLogin.jsx";
 import { useDispatch } from "react-redux";
 import { logUser } from "./../../redux.js";
 import { useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [idToken, setIdToken] = useState("");
   const [userInfo, setUserInfo] = useState([]);
+  const [responseCode, setResponseCode] = useState(0);
+  const [errorTxt, setErrorTxt] = useState("");
+
+  function isEmail(emailAdress) {
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (emailAdress.match(regex)) return true;
+    else return false;
+  }
+
+  function error(param) {
+    switch (param) {
+      case 1: // Erreur regex ou champ vide
+        setErrorTxt("Veuillez rentrer une adresse mail/Mot de passe valide");
+        break;
+      case 2: // Retour api != 200
+        setErrorTxt("Identifiant(s) incorrect(s)");
+        break;
+      case 3: // Pas d'erreur
+        setErrorTxt(undefined);
+        break;
+    }
+  }
 
   useEffect(() => {
-    if (idToken && userInfo.length > 0) {
+    if (idToken && userInfo.length > 0 && responseCode === 200) {
       console.log(idToken, userInfo);
       dispatch(logUser({ token: idToken, userinfo: userInfo }));
+      console.log(responseCode);
       navigate("/user");
+    } else if (responseCode !== 0 && responseCode !== 200) {
+      error(2);
     }
-  }, [idToken, userInfo, dispatch, navigate]);
+  }, [idToken, userInfo, dispatch, navigate, responseCode]);
 
   const loginClick = async (e) => {
     e.preventDefault();
     const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
-    await CallLogin(username, password, setIdToken, setUserInfo);
+
+    console.log(username, password);
+    if (isEmail(username) && password !== "") {
+      error(3);
+      await CallLogin(
+        username,
+        password,
+        setIdToken,
+        setUserInfo,
+        setResponseCode
+      );
+    } else {
+      error(1);
+    }
   };
 
   return (
@@ -55,6 +95,7 @@ function SignIn() {
           </a>
                     SHOULD BE THE BUTTON BELOW
                     */}
+          {errorTxt && <p className="errorTxt">{errorTxt}</p>}
           <button type="submit" className="sign-in-button">
             Sign In
           </button>
