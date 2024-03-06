@@ -13,6 +13,19 @@ function SignIn() {
   const [userInfo, setUserInfo] = useState([]);
   const [responseCode, setResponseCode] = useState(0);
   const [errorTxt, setErrorTxt] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("idToken") && localStorage.getItem("userInfo")) {
+      dispatch(
+        logUser({
+          token: localStorage.getItem("idToken"),
+          userinfo: JSON.parse(localStorage.getItem("userInfo")),
+        })
+      );
+      navigate("/user");
+    }
+  }, []);
 
   function isEmail(emailAdress) {
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -38,6 +51,8 @@ function SignIn() {
   useEffect(() => {
     if (idToken && userInfo.length > 0 && responseCode === 200) {
       console.log(idToken, userInfo);
+      localStorage.setItem("idToken", idToken);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       dispatch(logUser({ token: idToken, userinfo: userInfo }));
       console.log(responseCode);
       navigate("/user");
@@ -85,7 +100,11 @@ function SignIn() {
             />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              onChange={() => setRememberMe(!rememberMe)}
+              type="checkbox"
+              id="remember-me"
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           {/*
