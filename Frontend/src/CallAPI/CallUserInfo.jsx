@@ -1,6 +1,6 @@
 import { API } from "./API.jsx";
 
-export function CallUserInfo(token, setUserInfo) {
+export function CallUserInfo(token, setUserInfo, navigate) {
   const urlProfile = `${API}/profile`;
   fetch(`${urlProfile}`, {
     method: "POST",
@@ -9,7 +9,15 @@ export function CallUserInfo(token, setUserInfo) {
       Authorization: `Bearer ${token}`,
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        localStorage.removeItem("idToken");
+        localStorage.removeItem("userInfo");
+        navigate("/");
+        throw new Error("Token error");
+      }
+      return response.json();
+    })
     .then((data) => {
       setUserInfo([data.body]);
     })

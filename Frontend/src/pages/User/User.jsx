@@ -32,7 +32,7 @@ function User() {
     } else {
       setShowInput(false);
       CallChangeName(inputValue, userData.token).then(() =>
-        CallUserInfo(userData.token, setUserInfo)
+        CallUserInfo(userData.token, setUserInfo, navigate)
       );
 
       dispatch({ type: "changeUsername", payload: { userName: inputValue } });
