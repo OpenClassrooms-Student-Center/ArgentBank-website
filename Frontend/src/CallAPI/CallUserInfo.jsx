@@ -21,6 +21,9 @@ export function CallUserInfo(token, setUserInfo, navigate) {
     .then((data) => {
       setUserInfo([data.body]);
     })
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => {
+      console.error("Error:", error);
+      return Promise.reject(error);
+    });
 }
 export default CallUserInfo;
