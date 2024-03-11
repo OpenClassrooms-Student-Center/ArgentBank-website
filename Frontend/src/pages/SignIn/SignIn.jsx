@@ -51,17 +51,15 @@ function SignIn() {
   useEffect(() => {
     if (idToken && userInfo.length > 0 && responseCode === 200) {
       console.log(idToken, userInfo);
-      if (rememberMe) {
-        localStorage.setItem("idToken", idToken);
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-      }
+      localStorage.setItem("idToken", idToken);
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       dispatch(logUser({ token: idToken, userinfo: userInfo }));
       console.log(responseCode);
       navigate("/user");
     } else if (responseCode !== 0 && responseCode !== 200) {
       error(2);
     }
-  }, [idToken, userInfo, dispatch, navigate, responseCode, rememberMe]);
+  }, [idToken, userInfo, dispatch, navigate, responseCode]);
 
   const loginClick = async (e) => {
     e.preventDefault();

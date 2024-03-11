@@ -12,18 +12,7 @@ export async function CallChangeName(userName, token) {
     body: JSON.stringify({
       userName: userName,
     }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        localStorage.removeItem("idToken");
-        localStorage.removeItem("userInfo");
-        throw new Error("CallChangeName Error");
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  }).then((response) => response.json());
 }
 
 export default CallChangeName;
