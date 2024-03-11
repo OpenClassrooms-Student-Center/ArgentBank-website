@@ -32,11 +32,7 @@ function User() {
     } else {
       setShowInput(false);
       CallChangeName(inputValue, userData.token).then(() =>
-        CallUserInfo(userData.token, setUserInfo, navigate).then(() => {
-          localStorage.setItem("idToken", userData.token);
-          localStorage.setItem("userInfo", JSON.stringify(userInfo));
-          console.log("UserInfoApresCall", userInfo);
-        })
+        CallUserInfo(userData.token, setUserInfo, navigate)
       );
 
       dispatch({ type: "changeUsername", payload: { userName: inputValue } });
