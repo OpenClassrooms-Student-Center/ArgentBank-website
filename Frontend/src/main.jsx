@@ -10,6 +10,7 @@ import Home from "./pages/Home/Home";
 import "./assets/css/main.css";
 import SignIn from "./pages/SignIn/SignIn";
 import User from "./pages/User/User";
+import Page404 from "./pages/Page404/Page404";
 
 const root = document.getElementById("root");
 ReactDOM.createRoot(root).render(
@@ -21,6 +22,7 @@ ReactDOM.createRoot(root).render(
           <Route path="/" element={<Home />}></Route>
           <Route path="/sign-in" element={<SignIn />}></Route>
           <Route path="/user" element={<User />}></Route>
+          <Route path="/*" element={<Page404 />}></Route>
         </Routes>
         <Footer />
       </Router>

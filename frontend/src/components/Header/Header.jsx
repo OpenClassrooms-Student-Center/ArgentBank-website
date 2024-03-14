@@ -21,6 +21,7 @@ function Header() {
               <i className="fa fa-user-circle"></i>
               {userData.userinfo[0].userName}
             </a>
+            <a href="./">Logout</a>
           </div>
         ) : (
           <div>
