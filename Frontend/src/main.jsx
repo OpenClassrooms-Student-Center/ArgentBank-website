@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { store } from "./redux";
@@ -13,7 +13,7 @@ import User from "./pages/User/User";
 import Page404 from "./pages/Page404/Page404";
 
 const root = document.getElementById("root");
-ReactDOM.createRoot(root).render(
+createRoot(root).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
