@@ -13,6 +13,7 @@ function SignIn() {
   const [userInfo, setUserInfo] = useState([]);
   const [responseCode, setResponseCode] = useState(0);
   const [errorTxt, setErrorTxt] = useState("");
+  const [reCall, setReCall] = useState(false);
 
   function isEmail(emailAdress) {
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -22,17 +23,23 @@ function SignIn() {
   }
 
   function error(param) {
+    let errorMessage = "";
     switch (param) {
-      case 1: // Erreur regex ou champ vide
-        setErrorTxt("Veuillez rentrer une adresse mail/Mot de passe valide");
+      case 1:
+        errorMessage = "Veuillez rentrer une adresse mail/Mot de passe valide";
         break;
-      case 2: // Retour api != 200
-        setErrorTxt("Identifiant(s) incorrect(s)");
+      case 2:
+        errorMessage = "Identifiant(s) incorrect(s)";
         break;
-      case 3: // Pas d'erreur
-        setErrorTxt(undefined);
+      case 3:
+        errorMessage = ""; // Aucun message d'erreur
         break;
     }
+
+    // Force une mise à jour en réinitialisant d'abord l'état
+    setErrorTxt(""); // Réinitialise l'état pour forcer la mise à jour
+    // Définit ensuite l'état avec le message d'erreur souhaité
+    setTimeout(() => setErrorTxt(errorMessage), 0); // Utiliser setTimeout pour éviter le batch des mises à jour d'état
   }
 
   useEffect(() => {
@@ -43,14 +50,15 @@ function SignIn() {
       navigate("/user");
     } else if (responseCode !== 0 && responseCode !== 200) {
       error(2);
+      setReCall(false);
     }
-  }, [idToken, userInfo, dispatch, navigate, responseCode]);
+  }, [idToken, userInfo, dispatch, navigate, responseCode, reCall]);
 
   const loginClick = async (e) => {
     e.preventDefault();
     const username = document.querySelector("#username").value;
     const password = document.querySelector("#password").value;
-
+    setReCall(true);
     console.log(username, password);
     if (isEmail(username) && password !== "") {
       error(3);
