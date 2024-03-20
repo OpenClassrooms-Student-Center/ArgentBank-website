@@ -16,7 +16,6 @@ function User() {
 
   useEffect(() => {
     if (userData.token && userInfo.length > 0) {
-      console.log(userInfo[0]);
       dispatch(logUser({ token: userData.token, userinfo: userInfo }));
     }
   }, [userInfo, dispatch, userData.token]);
@@ -36,7 +35,6 @@ function User() {
       );
 
       dispatch({ type: "changeUsername", payload: { userName: inputValue } });
-      console.log(userData);
     }
   };
 
