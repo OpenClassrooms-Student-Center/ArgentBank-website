@@ -36,9 +36,8 @@ function SignIn() {
         break;
     }
 
-    // Force une mise à jour en réinitialisant d'abord l'état
     setErrorTxt(""); // Réinitialise l'état pour forcer la mise à jour
-    // Définit ensuite l'état avec le message d'erreur souhaité
+
     setTimeout(() => setErrorTxt(errorMessage), 0); // Utiliser setTimeout pour éviter le batch des mises à jour d'état
   }
 
@@ -71,6 +70,7 @@ function SignIn() {
       );
     } else {
       error(1);
+      setResponseCode(0);
     }
   };
 
