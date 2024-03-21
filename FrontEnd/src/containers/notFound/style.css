@@ -1,0 +1,25 @@
+.notFound {
+    margin: 90px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 10px;
+  }
+  .notFound-img {
+    width: 60%;
+    height: auto;
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .notFound-p {
+    font-size: 36px;
+    font-weight: 500;
+    color: red;
+    margin-bottom: 120px;
+    text-align: center;
+  }
+  Link {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  

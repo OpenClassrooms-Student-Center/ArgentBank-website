@@ -1,0 +1,48 @@
+
+.title{
+    color: #fff;
+}
+
+.inputuser {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 1rem;
+  column-gap: 10px;
+}
+
+.inputuser label {
+  font-weight: bold;
+  color: #fff;
+}
+
+.iinputuser input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+.sign-in-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+.editUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 11px;
+
+}
