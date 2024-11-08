@@ -1,0 +1,20 @@
+.sign-in-content {
+    box-sizing: border-box;
+    background-color: white;
+    width: 300px;
+    height: fit-content;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.sign-in-icon {
+    font-size: 5rem;
+}
+
+.input-remember {
+    display: flex;
+}
+
+.input-remember label {
+    margin-left: 0.25rem;
+}

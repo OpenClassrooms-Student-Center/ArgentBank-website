@@ -1,0 +1,25 @@
+.nav-item {
+    text-decoration: none;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.log-in {
+    cursor: pointer;
+}
+
+.log-out {
+    border: none;
+    background: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.log-out :hover,
+.log-in :hover {
+    text-decoration: underline;
+}

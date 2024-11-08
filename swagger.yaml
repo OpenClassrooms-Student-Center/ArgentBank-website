@@ -101,6 +101,96 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Accounts List
+      description: API to retrieve a user's list of accounts
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: account List Recovery Completed Successfully
+          schema:
+            $ref: '#/definitions/Accounts'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /accounts/{accountId}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Transactions List
+      description: API to retrieve the list of transactions from the account according to accountId
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successfully retrieved the list of transactions
+          schema:
+            $ref: '#/definitions/Transactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /categories:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Change category
+      description: API to change the category of a transaction
+      parameters:
+        - in: body
+          name: body
+          description: new category Payload
+          required: true
+          schema:
+            $ref: '#/definitions/NewCategory'
+      #produces:
+        # - application/json
+      responses:
+        '200':
+          description: Successfully Modified Transaction Category
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /notes:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Change notes on transaction
+      description: API to change the personal note of a transaction
+      parameters:
+        - in: body
+          name: body
+          description: new comment Payload
+          required: true
+          schema:
+            $ref: '#/definitions/NewComment'
+      #produces:
+        # - application/json
+      responses:
+        '200':
+          description: Successfully Modified Transaction Note
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -156,3 +246,48 @@ definitions:
     properties:
       userName:
         type: string
+  Accounts :
+    type : object
+    properties : 
+      accountId : 
+        type : string
+        description : account number
+      accountName :
+        type : string
+        description : account entitled
+      sold :
+        type : integer
+      description : actual balance for account
+  Transactions :
+    type : object
+    Properties :
+      date :
+        type : string
+        description : date of the transaction
+      description :
+        type : string
+        description : description of the transaction
+      amount :
+        type : integer
+        description : amount of the transaction
+      balance :
+        type : integer
+        description : balance after transaction
+      type :
+        type : string
+        description : Payment Method
+      category :
+        type : string
+        description : Expense Category
+      note :
+        type : string
+        description : personal note of user
+  NewCategory :
+    properties :
+      category :
+        type : string
+  NewComment :
+    properties :
+      note :
+        type : string
+

@@ -1,0 +1,14 @@
+.CTA-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+}

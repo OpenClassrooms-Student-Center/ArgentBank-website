@@ -8,13 +8,16 @@
   "license": "",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "@reduxjs/toolkit": "^2.3.0",
+    "axios": "^1.7.7",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^5.9.21",
+    "react-redux": "^9.1.2",
+    "semver": "^7.6.3",
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"
   },
@@ -24,6 +27,6 @@
     "server": "node ./server/server.js"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^3.1.7"
   }
 }
