@@ -1,9 +1,9 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -21,17 +21,17 @@ paths:
           description: Login Payload
           required: true
           schema:
-            $ref: '#/definitions/Login'
+            $ref: "#/definitions/Login"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Login Successfully
           schema:
-            $ref: '#/definitions/LoginResponse'
-        '400':
+            $ref: "#/definitions/LoginResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/signup:
     post:
@@ -45,17 +45,17 @@ paths:
           description: Signup Payload
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Signup Successfully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/profile:
     post:
@@ -66,15 +66,17 @@ paths:
       summary: User Profile API
       description: API for fetching a user profile
       #produces:
-       # - application/json
+      # - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "404":
+          description: profile not found
+        "500":
           description: Internal Server Error
     put:
       security:
@@ -89,17 +91,73 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: '#/definitions/UserProfile'
+            $ref: "#/definitions/UserProfile"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
+          description: Internal Server Error
+  /user/transaction:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: transaction
+      description: API for transaction
+      parameters:
+        - in: body
+          name: body
+          description: transaction Payload
+          required: true
+          schema:
+            $ref: "#/definitions/transaction"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: transaction Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "404":
+          description: transaction not found
+        "500":
+          description: Internal Server Error
+  /user/info_transaction:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: info_transaction
+      description: API for info_transaction
+      parameters:
+        - in: body
+          name: body
+          description: info_transaction Payload
+          required: true
+          schema:
+            $ref: "#/definitions/info_transaction"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: info_transaction Successfully
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        "400":
+          description: Invalid Fields
+        "404":
+          description: info_transaction not found
+        "500":
           description: Internal Server Error
 securityDefinitions:
   Bearer:
@@ -155,4 +213,20 @@ definitions:
     type: object
     properties:
       userName:
+        type: string
+  transaction:
+    type: object
+    properties:
+      montant:
+        type: string
+      destinataire:
+        type: string
+      libellé:
+        type: string
+  info_transaction:
+    type: object
+    properties:
+      tag_transaction:
+        type: string
+      memo_transaction:
         type: string
